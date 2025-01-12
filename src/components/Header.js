@@ -1,22 +1,30 @@
-// filepath: /C:/Users/farde/OneDrive/Startup/FutureXFinance.com/frontend/src/components/Header.js
-import React from 'react';
+import React, { useState } from 'react';
 import './styles/Header.css';
 
 const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <header className="header">
       <div className="left">
         <img src={`${process.env.PUBLIC_URL}/logo.png`} alt="Company Logo" className="logo" />
         <span className="company-name">Future<span className="highlight">X</span>Finance</span>
       </div>
-      <nav className="middle">
+      <div className="menu-icon" onClick={toggleMenu}>
+        &#9776;
+      </div>
+      <nav className={`middle ${isMenuOpen ? 'open' : ''}`}>
         <a href="#ai-agents">AI Agents</a>
         <a href="#download">Download</a>
         <a href="#pricing">Pricing</a>
         <a href="#resources">Resources</a>
         <a href="#support">Support</a>
       </nav>
-      <div className="right">
+      <div className={`right ${isMenuOpen ? 'open' : ''}`}>
         <a href="#free-trial" className="button">Free Trial</a>
         <a href="#login" className="button">Login</a>
       </div>
