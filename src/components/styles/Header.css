@@ -1,0 +1,45 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    padding: 10px 20px;
+    color: white;
+  }
+  
+  .left, .middle, .right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  .company-name {
+    font-size: 1.5em;
+    font-family: 'DM Serif Text', sans-serif; /* Change this to your desired font */
+  }
+  
+  .highlight {
+    color: #ffffff; /* Change this to your desired color */
+    /* font-style: italic; */
+    font-size: 1.51em; /* Optional: Adjust the size to make it stand out */
+    font-family: 'Mystery Quest';
+  }
+  
+  .middle a {
+    margin: 0 15px;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .right .button {
+    margin-left: 15px;
+    color: white;
+    text-decoration: none;
+    border: 1px solid white;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
