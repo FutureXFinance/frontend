@@ -26,6 +26,7 @@
   letter-spacing: 1px; /* Stylish spacing */
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Subtle text shadow */
   margin: 0;
+  text-decoration: none;
 }
 
 .highlight {
@@ -39,41 +40,30 @@
   justify-content: center;
 }
 
+
 .middle a {
   margin: 0 15px;
   color: white;
+  background-color: transparent;
   text-decoration: none;
   font-size: 0.8rem;
 }
+
 
 .right .button {
   margin-left: 15px;
   color: white;
   text-decoration: none;
-  /* border: 1px solid white; */
   padding: 5px 10px;
   border-radius: 5px;
   text-align: center;
   white-space: nowrap; /* Ensure the button text does not wrap */
   font-size: 0.8rem;
-}
-
-.right .button.login {
   background-color: #13264D;
   border: 1px solid #13264D;
 }
 
-.right .button.login:hover {
-  background-color: #043668;
-  border: 1px solid #043668;
-}
-
-.right .button.free-trial{
-  background-color: #13264D;
-  border: 1px solid #13264D;
-}
-
-.right .button.free-trial:hover {
+.right .button:hover {
   background-color: #043668;
   border: 1px solid #043668;
 }
@@ -109,7 +99,10 @@
     margin: 10px 0;
     text-align: left;
     width: 100%;
+    background-color: transparent;
   }
+
+  .middle a:focus, .middle a:active { outline: none !important; box-shadow: none !important; background-color: transparent !important; color: inherit !important; border: none !important; text-decoration: none !important; -webkit-tap-highlight-color: transparent !important; /* For mobile browsers */ }
 
   .right .button {
     margin: 10px 0;

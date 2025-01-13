@@ -12,7 +12,9 @@ const Header = () => {
     <header className="header">
       <div className="left">
         <img src={`${process.env.PUBLIC_URL}/logo.png`} alt="Company Logo" className="logo" />
-        <span className="company-name">Future<span className="highlight">X</span>Finance</span>
+        <a href="/" className="company-name">
+          Future<span className="highlight">X</span>Finance
+        </a>
       </div>
       <div className="menu-icon" onClick={toggleMenu}>
         &#9776;
@@ -25,8 +27,8 @@ const Header = () => {
         <a href="#support">Support</a>
       </nav>
       <div className={`right ${isMenuOpen ? 'open' : ''}`}>
-        <a href="#free-trial" className="button free-trial">Free Trial</a>
-        <a href="#login" className="button login">Login</a>
+        <a href="#free-trial" className="button">Free Trial</a>
+        <a href="#login" className="button">Login</a>
       </div>
     </header>
   );
