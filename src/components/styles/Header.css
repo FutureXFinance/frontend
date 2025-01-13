@@ -29,6 +29,8 @@
   text-decoration: none;
 }
 
+.company-name:focus, .company-name:active { outline: none !important; box-shadow: none !important; background-color: transparent !important; color: inherit !important; border: none !important; text-decoration: none !important; -webkit-tap-highlight-color: transparent !important; }
+
 .highlight {
   color: #ffffff;
   font-size: 1.1em; 
@@ -80,6 +82,8 @@
   .menu-icon {
     display: block;
   }
+
+  .company-name:focus, .company-name:active { outline: none !important; box-shadow: none !important; background-color: transparent !important; color: inherit !important; border: none !important; text-decoration: none !important; -webkit-tap-highlight-color: transparent !important; }
 
   .middle, .right {
     display: none;
