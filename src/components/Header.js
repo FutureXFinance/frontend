@@ -25,8 +25,8 @@ const Header = () => {
         <a href="#support">Support</a>
       </nav>
       <div className={`right ${isMenuOpen ? 'open' : ''}`}>
-        <a href="#free-trial" className="button">Free Trial</a>
-        <a href="#login" className="button">Login</a>
+        <a href="#free-trial" className="button free-trial">Free Trial</a>
+        <a href="#login" className="button login">Login</a>
       </div>
     </header>
   );

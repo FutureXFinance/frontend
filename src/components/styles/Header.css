@@ -15,17 +15,22 @@
 
 .logo {
   height: 40px;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .company-name {
-  font-size: 1.5em;
-  font-family: 'DM Serif Text', sans-serif;
+  font-family: 'Poppins'; /* Clean, modern font */
+  font-size: 1.5rem; /* Large and bold */
+  font-weight: 500; /* Make it stand out */
+  color: #ffffff; /* White text for contrast */
+  letter-spacing: 1px; /* Stylish spacing */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Subtle text shadow */
+  margin: 0;
 }
 
 .highlight {
   color: #ffffff;
-  font-size: 1.5em; 
+  font-size: 1.1em; 
   font-family: 'Mystery Quest';
 }
 
@@ -38,15 +43,39 @@
   margin: 0 15px;
   color: white;
   text-decoration: none;
+  font-size: 0.8rem;
 }
 
 .right .button {
   margin-left: 15px;
   color: white;
   text-decoration: none;
-  border: 1px solid white;
+  /* border: 1px solid white; */
   padding: 5px 10px;
   border-radius: 5px;
+  text-align: center;
+  white-space: nowrap; /* Ensure the button text does not wrap */
+  font-size: 0.8rem;
+}
+
+.right .button.login {
+  background-color: #13264D;
+  border: 1px solid #13264D;
+}
+
+.right .button.login:hover {
+  background-color: #043668;
+  border: 1px solid #043668;
+}
+
+.right .button.free-trial{
+  background-color: #13264D;
+  border: 1px solid #13264D;
+}
+
+.right .button.free-trial:hover {
+  background-color: #043668;
+  border: 1px solid #043668;
 }
 
 .menu-icon {
@@ -64,7 +93,7 @@
   .middle, .right {
     display: none;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
   }
 
@@ -72,7 +101,24 @@
     display: flex;
   }
 
-  .middle a, .right .button {
+  .middle {
+    margin-left: 30px; /* Add margin to start below the title */
+  }
+
+  .middle a {
     margin: 10px 0;
+    text-align: left;
+    width: 100%;
+  }
+
+  .right .button {
+    margin: 10px 0;
+    text-align: center;
+    width: 100%;
+    font-size: 0.8rem;
+  }
+
+  .right {
+    align-items: center; /* Center the buttons */
   }
 }
