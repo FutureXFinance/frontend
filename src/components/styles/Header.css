@@ -49,6 +49,7 @@
   font-size: 0.8rem;
 }
 
+.middle a:focus, .middle a:active { outline: none !important; box-shadow: none !important; background-color: transparent !important; color: inherit !important; border: none !important; text-decoration: none !important; -webkit-tap-highlight-color: transparent !important; }
 
 .right .button {
   margin-left: 15px;
@@ -102,7 +103,7 @@
     background-color: transparent;
   }
 
-  .middle a:focus, .middle a:active { outline: none !important; box-shadow: none !important; background-color: transparent !important; color: inherit !important; border: none !important; text-decoration: none !important; -webkit-tap-highlight-color: transparent !important; /* For mobile browsers */ }
+  .middle a:focus, .middle a:active { outline: none !important; box-shadow: none !important; background-color: transparent !important; color: inherit !important; border: none !important; text-decoration: none !important; -webkit-tap-highlight-color: transparent !important; }
 
   .right .button {
     margin: 10px 0;
