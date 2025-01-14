@@ -1,0 +1,81 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+}
+
+.home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 50px;
+    color: white;
+    min-height: 100vh;
+  }
+  
+ 
+
+  .title {
+    font-family: 'Poppins'; /* Clean, modern font */
+    font-size: 4rem; /* Large and bold */
+    font-weight: 500; /* Make it stand out */
+    color: #ffffff; /* White text for contrast */
+    letter-spacing: 1px; /* Stylish spacing */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Subtle text shadow */
+    margin: 10%;
+    text-decoration: none;
+  }
+  
+
+  .titleX {
+    color: #ffffff;
+    font-size: 4rem; 
+    font-family: 'Mystery Quest';
+  }
+  
+  .subtitle {
+    font-family: 'Poppins'; 
+    font-size: 3rem; 
+    font-weight: 500; 
+    color: #ffffff; 
+    letter-spacing: 1px; 
+    margin-top: 0;
+    text-decoration: none;
+  }
+
+  .ComingSoon {
+    animation: ComingSoonText 5s infinite;
+    margin: 1%;
+    font-family: 'Poppins'; 
+    font-size: 3rem; 
+    font-weight: 500; 
+    color: #ffffff; 
+    letter-spacing: 1px; 
+
+  }
+  
+  @keyframes ComingSoonText {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+
+  /* Media Queries for Mobile Devices */
+@media (max-width: 768px) {
+    .home {
+      padding: 20px;
+    }
+  
+    .title, .titleX {
+      font-size: 1.8rem;
+      text-align: center;
+    }
+  
+    .subtitle, .ComingSoon {
+      font-size: 1.3rem;
+    }
+  }

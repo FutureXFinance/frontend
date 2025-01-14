@@ -1,0 +1,87 @@
+.footer {
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .footer-logo img {
+    height: 100px;
+  }
+  
+  .footer-logo p {
+
+    font-family: 'Poppins'; 
+    font-size: 1.5rem; 
+    font-weight: 500; 
+    color: #ffffff; 
+    letter-spacing: 1px; 
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
+    margin: auto;
+    text-decoration: none;
+  }
+  
+  .footer-connect, .footer-company, .footer-platform, .footer-trading-bots, .footer-resources, .footer-support {
+    margin: 10px;
+    padding-left: 0;
+    text-align: left;
+  }
+  
+  .footer-connect a, .footer-company a, .footer-platform a, .footer-trading-bots a, .footer-resources a, .footer-support a {
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+    margin: 5px 0;
+    padding-left: 0;
+    margin-left: 0;
+  }
+  
+  .footer-connect a:hover, .footer-company a:hover, .footer-platform a:hover, .footer-trading-bots a:hover, .footer-resources a:hover, .footer-support a:hover {
+    color: #d5d5d5;
+  }
+
+  .footer-connect a:focus, .footer-connect a:active, .footer-company a:focus, .footer-company a:active, .footer-platform a:focus, .footer-platform a:active, .footer-trading-bots a:focus, .footer-trading-bots a:active, .footer-resources a:focus, .footer-resources a:active, .footer-support a:focus, .footer-support a:active { outline: none !important; box-shadow: none !important; background-color: transparent !important; color: inherit !important; border: none !important; text-decoration: none !important; -webkit-tap-highlight-color: transparent !important; }
+
+
+  .footer-copyright {
+    margin: 30px 0;
+  }
+
+
+  /* Media Queries for Mobile Devices */
+@media (max-width: 768px) {
+    .footer-content {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+
+    .footer-logo {
+        text-align: center;
+        width: 100%;
+    }
+  
+    .footer-logo img {
+      height: 100px;
+      margin: 0 auto;
+    }
+  
+    .footer-logo p {
+      font-size: 2rem;
+      text-align: center;
+    }
+  
+    .footer-connect, .footer-company, .footer-platform, .footer-trading-bots, .footer-resources, .footer-support {
+      margin: 5px 0;
+      text-align: left;
+    }
+  
+    .footer-connect a, .footer-company a, .footer-platform a, .footer-trading-bots a, .footer-resources a, .footer-support a {
+      margin: 2px 0;
+    }
+  }
