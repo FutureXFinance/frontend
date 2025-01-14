@@ -13,44 +13,34 @@ html, body {
     text-align: center;
     padding: 50px;
     color: white;
-    min-height: 100vh;
+    min-height: 80vh;
   }
   
  
 
-  .title {
-    font-family: 'Poppins'; /* Clean, modern font */
-    font-size: 4rem; /* Large and bold */
-    font-weight: 500; /* Make it stand out */
-    color: #ffffff; /* White text for contrast */
-    letter-spacing: 1px; /* Stylish spacing */
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Subtle text shadow */
-    margin: 10%;
-    text-decoration: none;
-  }
-  
-
-  .titleX {
-    color: #ffffff;
-    font-size: 4rem; 
-    font-family: 'Mystery Quest';
-  }
-  
-  .subtitle {
+  .title, .titleX {
     font-family: 'Poppins'; 
     font-size: 3rem; 
     font-weight: 500; 
-    color: #ffffff; 
-    letter-spacing: 1px; 
-    margin-top: 0;
+    color: #ffffff;
+    text-decoration: none;
+  }
+  
+  
+  .subtitle {
+    font-family: 'Poppins'; 
+    font-size: 2rem; 
+    font-weight: 400; 
+    color: #ffffff;
+    margin-top: 5%;
     text-decoration: none;
   }
 
   .ComingSoon {
     animation: ComingSoonText 5s infinite;
-    margin: 1%;
+    margin: 0%;
     font-family: 'Poppins'; 
-    font-size: 3rem; 
+    font-size: 2rem; 
     font-weight: 500; 
     color: #ffffff; 
     letter-spacing: 1px; 
