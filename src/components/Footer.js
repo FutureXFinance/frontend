@@ -33,7 +33,7 @@ const Footer = () => {
           <a href="/automated-tools">Automated Trading Tools</a>
           <a href="/portfolio-manager">Portfolio Manager</a>
           <a href="/investment-insights">AI-Driven Investment Insights</a>
-          <a href="/copy-traders">Copy Top Traders’ Portfolios</a>
+          <a href="/copy-traders">Copy Top Traders Portfolios</a>
           <a href="/exchange-integrations">Crypto Exchange Integrations</a>
         </div>
         {/* <div className="footer-trading-bots">

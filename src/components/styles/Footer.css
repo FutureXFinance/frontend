@@ -30,6 +30,7 @@
     margin: 10px;
     padding-left: 0;
     text-align: left;
+    font-size: 1rem;
   }
   
   .footer-connect a, .footer-company a, .footer-platform a, .footer-trading-bots a, .footer-resources a, .footer-support a {
@@ -39,6 +40,7 @@
     margin: 5px 0;
     padding-left: 0;
     margin-left: 0;
+    font-size: 0.9rem;
   }
   
   .footer-connect a:hover, .footer-company a:hover, .footer-platform a:hover, .footer-trading-bots a:hover, .footer-resources a:hover, .footer-support a:hover {
@@ -79,9 +81,11 @@
     .footer-connect, .footer-company, .footer-platform, .footer-trading-bots, .footer-resources, .footer-support {
       margin: 5px 0;
       text-align: left;
+      font-size: 1rem;
     }
   
     .footer-connect a, .footer-company a, .footer-platform a, .footer-trading-bots a, .footer-resources a, .footer-support a {
       margin: 2px 0;
+      font-size: 0.9rem;
     }
   }
