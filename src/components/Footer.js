@@ -36,15 +36,6 @@ const Footer = () => {
           <a href="/copy-traders">Copy Top Traders Portfolios</a>
           <a href="/exchange-integrations">Crypto Exchange Integrations</a>
         </div>
-        {/* <div className="footer-trading-bots">
-          <h4>Trading Bots</h4>
-          <a href="/binance-bot">Binance Trading Bot</a>
-          <a href="/kucoin-bot">KuCoin Trading Bot</a>
-          <a href="/bybit-bot">Bybit Trading Bot</a>
-          <a href="/okx-bot">OKX Trading Bot</a>
-          <a href="/coinbase-bot">Coinbase Trading Bot</a>
-          <a href="/mexc-bot">MEXC Trading Bot</a>
-        </div> */}
         <div className="footer-resources">
           <h4>Resources</h4>
           <a href="/blog">Blog</a>

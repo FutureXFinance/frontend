@@ -35,7 +35,7 @@ body {
   }
   
   .footer-connect, .footer-company, .footer-platform, .footer-trading-bots, .footer-resources, .footer-support {
-    margin: 10px;
+    margin: 10px ;
     padding-left: 0;
     text-align: left;
     font-size: 1rem;
