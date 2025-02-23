@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './styles/Header.css';
+import { NavLink, Link } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,7 +29,7 @@ const Header = () => {
       </nav>
       <div className={`right ${isMenuOpen ? 'open' : ''}`}>
         <a href="#free-trial" className="button">Free Trial</a>
-        <a href="#login" className="button">Login</a>
+        <Link className='button' to = "/login">Login</Link>
       </div>
     </header>
   );
