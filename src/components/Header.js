@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './styles/Header.css';
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

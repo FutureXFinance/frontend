@@ -12,7 +12,7 @@ const SignUp = () => {
     const [otp, setOtp] = useState('');
     const [error, setError] = useState('');
     const [otpSent, setOtpSent] = useState(false);
-    const [otpInputVisible, setOtpInputVisible] = useState(false); // Control OTP input visibility
+    const [setOtpInputVisible] = useState(false); // Control OTP input visibility
     const [isOtpValid, setIsOtpValid] = useState(false); // Track OTP verification
     const navigate = useNavigate();
 
