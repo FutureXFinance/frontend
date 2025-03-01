@@ -29,7 +29,7 @@ const Header = () => {
       </nav>
       <div className={`right ${isMenuOpen ? 'open' : ''}`}>
         <a href="#free-trial" className="button">Free Trial</a>
-        <Link className='button' to = "/login">Login</Link>
+        <Link className='button' to = "/SignIn">Sign In</Link>
       </div>
     </header>
   );

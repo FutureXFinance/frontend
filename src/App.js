@@ -1,29 +1,31 @@
 import React from 'react';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
+import Dashboard from './components/Dashboard';
+import ProtectedRoute from './components/ProtectedRoute';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './components/Home';
-import LoginSignup from './components/LoginSignup';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import './App.css';
 
 function App() {
-  const routes = createBrowserRouter([
-    {
-      path: "/", 
-      element: <><Header /><Home /><Footer /></>
-    },
-    {
-      path: "/login",
-      element: <><LoginSignup /></>
-    }
-  ])
   return (
     <div className="App">
-      {/* <Header />
-      <Home />
-      <Footer />
-      <LoginSignup /> */}
-      <RouterProvider router={routes}/>
+        <Router>
+            <Header /> 
+            <Routes>
+                <Route path="/" element={<Home />} /> {/* Home Page */}
+                <Route path="/signin" element={<SignIn />} /> {/* Sign In Page */}
+                <Route path="/signup" element={<SignUp />} /> {/* Sign Up Page */}
+                <Route element={<ProtectedRoute />}>
+                    <Route path="/dashboard" element={<Dashboard />} /> {/* Protected Dashboard */}
+                </Route>
+                
+                {/* Add other public or protected routes here */}
+            </Routes>
+             <Footer />
+        </Router>
     </div>
   );
 }
