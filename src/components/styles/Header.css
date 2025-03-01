@@ -61,13 +61,13 @@
   text-align: center;
   white-space: nowrap; /* Ensure the button text does not wrap */
   font-size: 0.8rem;
-  background-color: #13264D;
-  border: 1px solid #13264D;
+  background-color: #3b82f6;
+  border: 1px solid #3b82f6;
 }
 
 .right .button:hover {
-  background-color: #043668;
-  border: 1px solid #043668;
+  background-color: #2563eb;
+  border: 1px solid #2563eb;
 }
 
 .menu-icon {

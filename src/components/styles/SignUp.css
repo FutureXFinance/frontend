@@ -171,3 +171,38 @@
     position: absolute;
     right: 1rem;
   }
+
+
+  .signUp-email-otp-container {
+    display: flex;
+    align-items: center; /* Vertically align items */
+    justify-content: space-between; /* Distribute space between email and button */
+}
+
+.signUp-otp-button {
+    /* Style your Send OTP button */
+    margin-left: 1rem; /* Add spacing between input and button */
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.signUp-otp-verify-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.signUp-verify-button {
+    /* Style your Verify OTP button */
+    margin-left: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
