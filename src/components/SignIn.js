@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './styles/SignIn.css';
+import { UserPlus } from 'lucide-react';
+
 
 const SignIn = () => {
     const [email, setEmail] = useState('');
@@ -77,10 +79,11 @@ const SignIn = () => {
                         </button>
                     </form>
                     <div className="signIn-additional-options">
-                        <a href="/signup" className="signIn-secondary-button">
+                        <Link to="/signup" className="signIn-secondary-button">
+                            <span><UserPlus size={13} /></span>
                             <span>Don't have an account?</span>
                             <span>Register</span>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

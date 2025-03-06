@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './styles/SignUp.css';
+import { LockKeyhole } from 'lucide-react';
 
 const SignUp = () => {
     const [firstName, setFirstName] = useState('');
@@ -185,10 +186,11 @@ const SignUp = () => {
                         )}
                     </form>
                     <div className="signUp-additional-options">
-                        <a href="/signin" className="signUp-secondary-button">
+                        <Link to="/signin" className="signUp-secondary-button">
+                            <span><LockKeyhole size={13} /></span>
                             <span>Already have an account?</span>
                             <span>Login</span>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -13,22 +13,22 @@ const Header = () => {
     <header className="header">
       <div className="left">
         <img src={`${process.env.PUBLIC_URL}/logo.png`} alt="Company Logo" className="logo" />
-        <a href="/" className="company-name">
+        <Link to="/" className="company-name">
           Future<span className="highlight">X</span>Finance
-        </a>
+        </Link>
       </div>
       <div className="menu-icon" onClick={toggleMenu}>
         &#9776;
       </div>
       <nav className={`middle ${isMenuOpen ? 'open' : ''}`}>
-        <a href="#ai-agents">AI Agents</a>
-        <a href="#download">Download</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#resources">Resources</a>
-        <a href="#support">Support</a>
+        <Link to="#ai-agents">AI Agents</Link>
+        <Link to="#download">Download</Link>
+        <Link to="#pricing">Pricing</Link>
+        <Link to="#resources">Resources</Link>
+        <Link to="#support">Support</Link>
       </nav>
       <div className={`right ${isMenuOpen ? 'open' : ''}`}>
-        <a href="#free-trial" className="button">Free Trial</a>
+        <Link to="#free-trial" className="button">Free Trial</Link>
         <Link className='button' to = "/SignIn">Sign In</Link>
       </div>
     </header>

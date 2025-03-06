@@ -19,12 +19,12 @@ function App() {
                 <Route path="/signin" element={<SignIn />} /> {/* Sign In Page */}
                 <Route path="/signup" element={<SignUp />} /> {/* Sign Up Page */}
                 <Route element={<ProtectedRoute />}>
-                    <Route path="/dashboard" element={<Dashboard />} /> {/* Protected Dashboard */}
+                  <Route path="/dashboard" element={<Dashboard />} /> {/* Protected Dashboard */}
                 </Route>
                 
                 {/* Add other public or protected routes here */}
             </Routes>
-             <Footer />
+            <Footer />
         </Router>
     </div>
   );

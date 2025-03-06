@@ -20,7 +20,7 @@
     }
   }
   
-  .signUp-form-wrapper { /* Changed class name */
+  .signUp-form-wrapper { 
     width: 100%;
     max-width: 25rem;
     padding: 2.5rem;
@@ -28,44 +28,44 @@
     background-color: #43434339;
   }
   
-  .signUp-logo-container { /* Changed class name */
+  .signUp-logo-container { 
     display: flex;
     justify-content: center;
     margin-bottom: 3rem;
   }
   
-  .signUp-logo-text { /* Changed class name */
+  .signUp-logo-text { 
     color: white;
     font-size: 1.875rem;
     font-weight: 700;
   }
   
   /* Form styles */
-  .signUp-auth-form { /* Changed class name */
+  .signUp-auth-form { 
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
   }
   
-  .signUp-name-fields { /* Changed class name */
+  .signUp-name-fields { 
     display: flex;
     gap: 1rem;
   }
   
-  .signUp-form-group { /* Changed class name */
+  .signUp-form-group { 
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     flex: 1;
   }
   
-  .signUp-form-group label { /* Changed class name */
+  .signUp-form-group label { 
     text-align: left;
     color: #94a3b8;
     font-size: 0.875rem;
   }
   
-  .signUp-form-input { /* Changed class name */
+  .signUp-form-input { 
     width: calc(100% - 2rem);
     padding: 0.75rem 1rem;
     border-radius: 0.5rem;
@@ -76,12 +76,11 @@
     transition: all 0.2s ease;
   }
   
-  .signUp-form-input:focus { /* Changed class name */
+  .signUp-form-input:focus { 
     border-color: #3b82f6;
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
   }
   
-  .signUp-submit-button { /* Changed class name */
+  .signUp-submit-button { 
     width: 100%;
     padding: 0.75rem;
     border-radius: 0.5rem;
@@ -93,18 +92,18 @@
     cursor: pointer;
   }
   
-  .signUp-submit-button:hover { /* Changed class name */
+  .signUp-submit-button:hover { 
     background-color: #2563eb;
   }
   
-  .signUp-additional-options { /* Changed class name */
+  .signUp-additional-options { 
     margin-top: 2rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
   
-  .signUp-secondary-button { /* Changed class name */
+  .signUp-secondary-button { 
     width: 100%;
     padding: 0.75rem 0rem;
     border-radius: 0.5rem;
@@ -118,14 +117,15 @@
     display: flex;
     align-items: center;
     position: relative;
+    text-decoration: none;
   }
   
-  .signUp-secondary-button:hover { /* Changed class name */
+  .signUp-secondary-button:hover { 
     background-color: #1a1d20;
   }
   
   /* Animation for form transitions */
-  .signUp-auth-form { /* Changed class name */
+  .signUp-auth-form { 
     animation: fadeIn 0.3s ease;
   }
   
@@ -140,20 +140,12 @@
     }
   }
   
-  /* Focus states and accessibility */
-  .signUp-form-input:focus-visible, /* Changed class name */
-  .signUp-submit-button:focus-visible, /* Changed class name */
-  .signUp-secondary-button:focus-visible { /* Changed class name */
-    outline: 2px solid #3b82f6;
-    outline-offset: 2px;
-  }
-  
   /* Error states */
-  .signUp-form-input.error { /* Changed class name */
+  .signUp-form-input.error { 
     border-color: #ef4444;
   }
   
-  .signUp-error-message { /* Changed class name */
+  .signUp-error-message { 
     color: #ef4444;
     font-size: 0.875rem;
     margin-top: 0.25rem;
@@ -163,11 +155,12 @@
     color: rgba(255, 255, 255, 0.3);
   }
 
-  .signUp-secondary-button > :first-child{ /* Changed class name */
-    padding: 0 1rem;
+  .signUp-secondary-button > :first-child{ 
+    padding: 0 0.5rem 0 1rem;
+    margin-top: 1.7px;
   }
 
-  .signUp-secondary-button > :last-child{ /* Changed class name */
+  .signUp-secondary-button > :last-child{ 
     position: absolute;
     right: 1rem;
   }
