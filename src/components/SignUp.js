@@ -16,11 +16,11 @@ const SignUp = () => {
     const [setOtpInputVisible] = useState(false); // Control OTP input visibility
     const [isOtpValid, setIsOtpValid] = useState(false); // Track OTP verification
     const navigate = useNavigate();
-    const APP_URL = process.env.APP_API_URL
+    const API_URL = process.env.REACT_APP_API_URL;
 
     const handleSendOtp = async () => {
         try {
-            const response = await axios.post(`${APP_URL}/api/auth/send-otp`, { email });
+            const response = await axios.post(`${API_URL}/send-otp`, { email });
             if (response.status === 200) {
                 setOtpSent(true);
                 setOtpInputVisible(true);
@@ -35,7 +35,7 @@ const SignUp = () => {
 
     const handleOtpVerify = async () => {
         try {
-            const response = await axios.post(`${APP_URL}/api/auth/verify-otp`, { email, otp });
+            const response = await axios.post(`${API_URL}/verify-otp`, { email, otp });
             if (response.status === 200 && response.data.isValid) {
                 setIsOtpValid(true);
                 setError('');
@@ -63,7 +63,7 @@ const SignUp = () => {
         }
 
         try {
-            const response = await axios.post(`${APP_URL}/api/auth/register`, {
+            const response = await axios.post(`${API_URL}/register`, {
                 firstName,
                 lastName,
                 email,
@@ -148,7 +148,7 @@ const SignUp = () => {
                             placeholder="Enter OTP"
                             required
                         />
-                        <button className='signUp-verify-button' onClick={handleOtpVerify}>Verify OTP</button> 
+                        <button className='signUp-verify-button' onClick={handleOtpVerify}>Verify</button> 
                     </div>
                 </div>
             )}

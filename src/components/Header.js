@@ -29,7 +29,7 @@ const Header = () => {
       </nav>
       <div className={`right ${isMenuOpen ? 'open' : ''}`}>
         <Link to="#free-trial" className="button">Free Trial</Link>
-        <Link className='button' to = "/SignIn">Sign In</Link>
+        <Link className='button' onClick={toggleMenu} to = "/SignIn">Sign In</Link>
       </div>
     </header>
   );
