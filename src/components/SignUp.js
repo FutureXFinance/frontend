@@ -17,7 +17,7 @@ const SignUp = () => {
     const [isOtpValid, setIsOtpValid] = useState(false); // Track OTP verification
     const navigate = useNavigate();
     const API_URL = process.env.REACT_APP_API_URL;
-
+    console.log(error)
     const handleSendOtp = async () => {
         try {
             const response = await axios.post(`${API_URL}/send-otp`, { email });
@@ -178,7 +178,7 @@ const SignUp = () => {
                                 required
                             />
                         </div>
-                        {error && <div className="signUp-error-message">{error}</div>}
+                        {/* {error && <div className="signUp-error-message">{error}</div>} */}
                         {isOtpValid && (
                             <button type="submit" className="signUp-submit-button">
                                 Sign Up
