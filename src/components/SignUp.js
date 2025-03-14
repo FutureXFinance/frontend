@@ -17,24 +17,35 @@ const SignUp = () => {
     const [isOtpValid, setIsOtpValid] = useState(false); // Track OTP verification
     const navigate = useNavigate();
     const API_URL = process.env.REACT_APP_API_URL;
-    console.log(error)
     const handleSendOtp = async () => {
         try {
+            console.log('Sending OTP to: ', {email})
             const response = await axios.post(`${API_URL}/send-otp`, { email });
             if (response.status === 200) {
                 setOtpSent(true);
                 setOtpInputVisible(true);
                 setError('');
-            } else {
-                setError(response.data.message || 'Error sending OTP.');
-            }
+            } 
         } catch (error) {
-            setError(error.response?.data?.message || 'Error sending OTP.');
+            setError(error.response?.data?.message );  // || 'Error sending OTP.'
         }
     };
 
     const handleOtpVerify = async () => {
         try {
+            // Add detailed logging
+            console.log('Verifying OTP with details:', {
+                email: email,
+                otp: otp,
+                otpLength: otp.length,
+                emailLength: email.length
+            });
+            
+            if (!email || !otp) {
+                setError('Both email and OTP are required.');
+                return;
+            }
+
             const response = await axios.post(`${API_URL}/verify-otp`, { email, otp });
             if (response.status === 200 && response.data.isValid) {
                 setIsOtpValid(true);
@@ -44,6 +55,7 @@ const SignUp = () => {
                 setIsOtpValid(false);
             }
         } catch (error) {
+            console.error('OTP verification error:', error.response?.data || error.message);
             setError(error.response?.data?.message || 'Error verifying OTP.');
         }
     };
@@ -178,8 +190,8 @@ const SignUp = () => {
                                 required
                             />
                         </div>
-                        {/* {error && <div className="signUp-error-message">{error}</div>} */}
-                        {isOtpValid && (
+                        {error && <div className="signUp-error-message">{error}</div>}
+                        {(    //isOtpValid && 
                             <button type="submit" className="signUp-submit-button">
                                 Sign Up
                             </button>

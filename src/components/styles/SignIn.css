@@ -114,16 +114,46 @@
     transition: all 0.2s ease;
     cursor: pointer;
     text-align: left;
+    justify-content: space-between;
     display: flex;
     align-items: center;
     position: relative;
     text-decoration: none;
+    gap: 0.5rem;
   }
   
   .signIn-secondary-button:hover { 
     background-color: #1a1d20;
   }
+
+  .signIn-secondary-button > span {
+    white-space: nowrap;
+  }
+
+  .signIn-secondary-button > :first-child {
+    padding: 0 0.5rem 0 1rem;
+    margin-top: 1.7px;
+  }
+
+  .signIn-secondary-button > :last-child {
+    padding-right: 1rem;
+  }
   
+@media (max-width: 480px) {
+  .signIn-secondary-button {
+    font-size: 0.75rem;
+    padding: 0.5rem 0;
+  }
+
+  .signIn-secondary-button > :first-child {
+    padding: 0 0.25rem 0 0.5rem;
+  }
+
+  .signIn-secondary-button > :last-child {
+    padding-right: 0.5rem;
+  }
+}
+
   /* Animation for form transitions */
   .signIn-auth-form { 
     animation: fadeIn 0.3s ease;
@@ -155,12 +185,3 @@
     color: rgba(255, 255, 255, 0.3);
   }
 
-  .signIn-secondary-button > :first-child{ 
-    padding: 0 0.5rem 0 1rem;
-    margin-top: 1.7px;
-  }
-
-  .signIn-secondary-button > :last-child{ 
-    position: absolute;
-    right: 1rem;
-  }

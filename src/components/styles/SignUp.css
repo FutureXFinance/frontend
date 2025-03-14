@@ -116,12 +116,42 @@
     text-align: left;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     position: relative;
     text-decoration: none;
+    gap: 0.5rem;
   }
   
   .signUp-secondary-button:hover { 
     background-color: #1a1d20;
+  }
+  
+  .signUp-secondary-button > span {
+    white-space: nowrap;
+  }
+  
+  .signUp-secondary-button > :first-child { 
+    padding: 0 0.5rem 0 1rem;
+    margin-top: 1.7px;
+  }
+  
+  .signUp-secondary-button > :last-child { 
+    padding-right: 1rem;
+  }
+  
+  @media (max-width: 480px) {
+    .signUp-secondary-button {
+        font-size: 0.75rem;
+        padding: 0.5rem 0;
+    }
+    
+    .signUp-secondary-button > :first-child {
+        padding: 0 0.25rem 0 0.5rem;
+    }
+    
+    .signUp-secondary-button > :last-child {
+        padding-right: 0.5rem;
+    }
   }
   
   /* Animation for form transitions */
@@ -154,17 +184,6 @@
   ::placeholder{
     color: rgba(255, 255, 255, 0.3);
   }
-
-  .signUp-secondary-button > :first-child{ 
-    padding: 0 0.5rem 0 1rem;
-    margin-top: 1.7px;
-  }
-
-  .signUp-secondary-button > :last-child{ 
-    position: absolute;
-    right: 1rem;
-  }
-
 
   .signUp-email-otp-container {
     display: flex;
