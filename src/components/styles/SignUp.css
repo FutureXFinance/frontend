@@ -50,6 +50,7 @@
   .signUp-name-fields { 
     display: flex;
     gap: 1rem;
+    width: 100%;
   }
   
   .signUp-form-group { 
@@ -57,6 +58,7 @@
     flex-direction: column;
     gap: 0.5rem;
     flex: 1;
+    width: 100%;
   }
   
   .signUp-form-group label { 
@@ -66,7 +68,7 @@
   }
   
   .signUp-form-input { 
-    width: calc(100% - 2rem);
+    width: 100%;
     padding: 0.75rem 1rem;
     border-radius: 0.5rem;
     background-color: transparent;
@@ -74,6 +76,8 @@
     border: 1.7px solid #25303e;
     outline: none;
     transition: all 0.2s ease;
+    padding-right: 40px !important; /* Make room for the validation icon */
+    box-sizing: border-box;
   }
   
   .signUp-form-input:focus { 
@@ -217,4 +221,42 @@
     color: white;
     border: none;
     cursor: pointer;
+}
+
+.otp-validation-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
+
+.check-icon {
+    color: #4CAF50;
+    width: 20px;
+    height: 20px;
+}
+
+.cross-icon {
+    color: #f44336;
+    width: 20px;
+    height: 20px;
+}
+
+.loading-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
