@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import './styles/SignUp.css';
-import './styles/shared.css';
 import { LockKeyhole } from 'lucide-react';
 import config from '../config';
 
@@ -14,14 +13,13 @@ const SignUp = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [otp, setOtp] = useState('');
     const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
     const [otpSent, setOtpSent] = useState(false);
     const [otpInputVisible, setOtpInputVisible] = useState(false);
     const [isOtpValid, setIsOtpValid] = useState(false);
     const navigate = useNavigate();
 
     const handleSendOtp = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Prevent form submission
         try {
             console.log('Attempting to send OTP to:', email);
             console.log('Using API URL:', config.API_URL);
@@ -33,21 +31,19 @@ const SignUp = () => {
                 setOtpSent(true);
                 setOtpInputVisible(true);
                 setError('');
-                setSuccess('OTP has been sent to your email!');
+                alert('OTP has been sent to your email!');
             }
         } catch (error) {
             console.error('OTP Send Error:', error);
             setError(error.response?.data?.message || 'Error sending OTP. Please try again.');
-            setSuccess('');
         }
     };
 
     const handleOtpVerify = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Prevent form submission
         try {
             if (!email || !otp) {
                 setError('Both email and OTP are required.');
-                setSuccess('');
                 return;
             }
 
@@ -57,23 +53,20 @@ const SignUp = () => {
             if (response.status === 200 && response.data.isValid) {
                 setIsOtpValid(true);
                 setError('');
-                setSuccess('OTP verified successfully!');
+                alert('OTP verified successfully!');
             } else {
                 setError(response.data.message || 'Invalid OTP.');
-                setSuccess('');
                 setIsOtpValid(false);
             }
         } catch (error) {
             console.error('OTP Verification Error:', error);
             setError(error.response?.data?.message || 'Error verifying OTP.');
-            setSuccess('');
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
-        setSuccess('');
 
         if (password !== confirmPassword) {
             setError('Passwords do not match.');
@@ -95,10 +88,8 @@ const SignUp = () => {
             });
             
             if (response.status === 201) {
-                setSuccess('Registration successful! Redirecting to login...');
-                setTimeout(() => {
-                    navigate('/signin');
-                }, 2000);
+                alert('Registration successful!');
+                navigate('/signin');
             } else {
                 setError(response.data.message || 'Registration failed.');
             }
@@ -162,10 +153,10 @@ const SignUp = () => {
                                 )}
                             </div>
                         </div>
-                        {otpSent && (
+                        {otpSent && ( // Conditionally render OTP input and button
                             <div className="signUp-form-group">
                                 <label htmlFor="otp">Enter OTP</label>
-                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                <div style={{ display: 'flex', alignItems: 'center' }}> {/* Added flexbox for side-by-side placement */}
                                     <input
                                         type="text"
                                         id="otp"
@@ -207,10 +198,11 @@ const SignUp = () => {
                             />
                         </div>
                         {error && <div className="signUp-error-message">{error}</div>}
-                        {success && <div className="signUp-success-message">{success}</div>}
-                        <button type="submit" className="signUp-submit-button">
-                            Sign Up
-                        </button>
+                        {(    //isOtpValid && 
+                            <button type="submit" className="signUp-submit-button">
+                                Sign Up
+                            </button>
+                        )}
                     </form>
                     <div className="signUp-additional-options">
                         <Link to="/signin" className="signUp-secondary-button">
