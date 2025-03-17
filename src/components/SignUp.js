@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import './styles/SignUp.css';
@@ -19,6 +19,8 @@ const SignUp = () => {
     const [otpInputVisible, setOtpInputVisible] = useState(false);
     const [isOtpValid, setIsOtpValid] = useState(false);
     const [isVerifying, setIsVerifying] = useState(false);
+    const [otpFields, setOtpFields] = useState(['', '', '', '', '', '']);
+    const otpRefs = [useRef(), useRef(), useRef(), useRef(), useRef(), useRef()];
     const navigate = useNavigate();
 
     const handleSendOtp = async (e) => {
@@ -74,15 +76,51 @@ const SignUp = () => {
         }
     };
 
-    const handleOtpChange = (e) => {
-        const value = e.target.value.replace(/[^0-9]/g, '').slice(0, 6);
-        setOtp(value);
-        if (value.length === 6) {
-            verifyOtp(value);
+    const handleOtpChange = (index, value) => {
+        // Only allow numbers
+        const numValue = value.replace(/[^0-9]/g, '');
+        if (numValue.length > 1) return; // Prevent multiple digits
+
+        const newOtpFields = [...otpFields];
+        newOtpFields[index] = numValue;
+        setOtpFields(newOtpFields);
+
+        // Auto-focus next input
+        if (numValue && index < 5) {
+            otpRefs[index + 1].current.focus();
+        }
+
+        // Combine all fields for verification
+        const combinedOtp = newOtpFields.join('');
+        setOtp(combinedOtp);
+
+        if (combinedOtp.length === 6) {
+            verifyOtp(combinedOtp);
         } else {
             setIsOtpValid(false);
             setError('');
             setSuccess('');
+        }
+    };
+
+    const handleKeyDown = (index, e) => {
+        // Handle backspace
+        if (e.key === 'Backspace' && !otpFields[index] && index > 0) {
+            otpRefs[index - 1].current.focus();
+        }
+    };
+
+    const handlePaste = (e) => {
+        e.preventDefault();
+        const pastedData = e.clipboardData.getData('text').replace(/[^0-9]/g, '').slice(0, 6);
+        const newOtpFields = [...otpFields];
+        for (let i = 0; i < 6; i++) {
+            newOtpFields[i] = pastedData[i] || '';
+        }
+        setOtpFields(newOtpFields);
+        setOtp(pastedData);
+        if (pastedData.length === 6) {
+            verifyOtp(pastedData);
         }
     };
 
@@ -181,18 +219,22 @@ const SignUp = () => {
                         {otpSent && (
                             <div className="signUp-form-group">
                                 <label htmlFor="otp">Enter OTP</label>
-                                <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
-                                    <input
-                                        type="text"
-                                        id="otp"
-                                        name="otp"
-                                        className="signUp-form-input"
-                                        value={otp}
-                                        onChange={handleOtpChange}
-                                        placeholder="Enter 6-digit OTP"
-                                        maxLength="6"
-                                        required
-                                    />
+                                <div className="otp-input-container">
+                                    {otpFields.map((digit, index) => (
+                                        <input
+                                            key={index}
+                                            ref={otpRefs[index]}
+                                            type="text"
+                                            maxLength="1"
+                                            value={digit}
+                                            onChange={(e) => handleOtpChange(index, e.target.value)}
+                                            onKeyDown={(e) => handleKeyDown(index, e)}
+                                            onPaste={handlePaste}
+                                            className={`otp-input ${isOtpValid ? 'valid' : ''} ${error ? 'invalid' : ''}`}
+                                            placeholder="0"
+                                            required
+                                        />
+                                    ))}
                                     {otp.length === 6 && (
                                         <div className="otp-validation-icon">
                                             {isVerifying ? (

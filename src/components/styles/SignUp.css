@@ -260,3 +260,58 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+.otp-input-container {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.otp-input {
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    border: 1.7px solid #25303e;
+    background-color: transparent;
+    color: white;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.otp-input:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.otp-input.valid {
+    border-color: #4CAF50;
+    background-color: rgba(76, 175, 80, 0.1);
+}
+
+.otp-input.invalid {
+    border-color: #f44336;
+    background-color: rgba(244, 67, 54, 0.1);
+}
+
+.otp-input::placeholder {
+    color: #25303e;
+}
+
+/* Hide number input spinners */
+.otp-input::-webkit-inner-spin-button,
+.otp-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Update validation icon position for new layout */
+.otp-validation-icon {
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+}
