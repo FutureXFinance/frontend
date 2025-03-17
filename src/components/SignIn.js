@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import './styles/SignIn.css';
+import './styles/shared.css';
 import { UserPlus } from 'lucide-react';
 
 
@@ -9,12 +10,14 @@ const SignIn = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
     const navigate = useNavigate();
     const API_URL = process.env.REACT_APP_API_URL;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
+        setSuccess('');
 
         try {
             const response = await axios.post(`${API_URL}/login`, {
@@ -22,9 +25,12 @@ const SignIn = () => {
                 password,
             });
 
-            if (response.status === 200) { // Successful login
+            if (response.status === 200) {
+                setSuccess('Login successful! Redirecting to dashboard...');
                 localStorage.setItem('token', response.data.token);
-                navigate('/dashboard');
+                setTimeout(() => {
+                    navigate('/dashboard');
+                }, 1500);
             } else {
                 setError(response.data.message || 'Login failed. Please try again.');
             }
@@ -74,6 +80,7 @@ const SignIn = () => {
                             />
                         </div>
                         {error && <div className="signIn-error-message">{error}</div>}
+                        {success && <div className="signIn-success-message">{success}</div>}
                         <button type="submit" className="signIn-submit-button">
                             Sign In
                         </button>
