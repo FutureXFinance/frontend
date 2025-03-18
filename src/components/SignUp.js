@@ -20,6 +20,14 @@ const SignUp = () => {
     const [isOtpValid, setIsOtpValid] = useState(false);
     const [isVerifying, setIsVerifying] = useState(false);
     const [otpFields, setOtpFields] = useState(['', '', '', '', '', '']);
+    const [showPasswordRules, setShowPasswordRules] = useState(false);
+    const [passwordValidation, setPasswordValidation] = useState({
+        minLength: false,
+        hasUpperCase: false,
+        hasLowerCase: false,
+        hasNumber: false,
+        hasSpecialChar: false
+    });
     const otpRefs = [useRef(), useRef(), useRef(), useRef(), useRef(), useRef()];
     const navigate = useNavigate();
 
@@ -42,7 +50,14 @@ const SignUp = () => {
             }
         } catch (error) {
             console.error('OTP Send Error:', error);
-            setError(error.response?.data?.message || 'Error sending OTP. Please try again.');
+            // Handle specific error cases
+            if (error.response?.status === 409) {
+                setError('This email is already registered. Please sign in instead.');
+            } else if (error.response?.status === 400) {
+                setError(error.response.data.message || 'Invalid email address.');
+            } else {
+                setError(error.response?.data?.message || 'Error sending OTP. Please try again.');
+            }
             setSuccess('');
         }
     };
@@ -161,6 +176,24 @@ const SignUp = () => {
         }
     };
 
+    // Add password validation function
+    const validatePassword = (value) => {
+        setPasswordValidation({
+            minLength: value.length >= 8,
+            hasUpperCase: /[A-Z]/.test(value),
+            hasLowerCase: /[a-z]/.test(value),
+            hasNumber: /\d/.test(value),
+            hasSpecialChar: /[!@#$%^&*(),.?":{}|<>]/.test(value)
+        });
+    };
+
+    // Update password handler
+    const handlePasswordChange = (e) => {
+        const value = e.target.value;
+        setPassword(value);
+        validatePassword(value);
+    };
+
     return (
         <div className="signUp-container">
             <div className="signUp-form-container">
@@ -256,10 +289,50 @@ const SignUp = () => {
                                 name="password"
                                 className="signUp-form-input"
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={handlePasswordChange}
+                                onFocus={() => setShowPasswordRules(true)}
                                 placeholder=""
                                 required
                             />
+                            {showPasswordRules && (
+                                <div className="password-rules">
+                                    <div className={`rule ${passwordValidation.minLength ? 'valid' : ''}`}>
+                                        {passwordValidation.minLength ? 
+                                            <Check size={12} className="check-icon" /> : 
+                                            <X size={12} className="cross-icon" />
+                                        }
+                                        <span>At least 8 characters</span>
+                                    </div>
+                                    <div className={`rule ${passwordValidation.hasUpperCase ? 'valid' : ''}`}>
+                                        {passwordValidation.hasUpperCase ? 
+                                            <Check size={12} className="check-icon" /> : 
+                                            <X size={12} className="cross-icon" />
+                                        }
+                                        <span>One uppercase letter</span>
+                                    </div>
+                                    <div className={`rule ${passwordValidation.hasLowerCase ? 'valid' : ''}`}>
+                                        {passwordValidation.hasLowerCase ? 
+                                            <Check size={12} className="check-icon" /> : 
+                                            <X size={12} className="cross-icon" />
+                                        }
+                                        <span>One lowercase letter</span>
+                                    </div>
+                                    <div className={`rule ${passwordValidation.hasNumber ? 'valid' : ''}`}>
+                                        {passwordValidation.hasNumber ? 
+                                            <Check size={12} className="check-icon" /> : 
+                                            <X size={12} className="cross-icon" />
+                                        }
+                                        <span>One number</span>
+                                    </div>
+                                    <div className={`rule ${passwordValidation.hasSpecialChar ? 'valid' : ''}`}>
+                                        {passwordValidation.hasSpecialChar ? 
+                                            <Check size={12} className="check-icon" /> : 
+                                            <X size={12} className="cross-icon" />
+                                        }
+                                        <span>One special character</span>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                         <div className="signUp-form-group">
                             <label htmlFor="confirmPassword">Confirm Password</label>

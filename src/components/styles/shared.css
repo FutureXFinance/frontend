@@ -1,9 +1,17 @@
 .signIn-success-message,
 .signUp-success-message {
-    background-color: #4CAF50;
-    color: white;
+    color: #4CAF50;
     padding: 10px;
-    border-radius: 4px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 14px;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.signIn-error-message,
+.signUp-error-message {
+    color: #ef4444;
+    padding: 10px;
     margin-bottom: 15px;
     text-align: center;
     font-size: 14px;

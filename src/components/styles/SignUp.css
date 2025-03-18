@@ -315,3 +315,34 @@
     top: 50%;
     transform: translateY(-50%);
 }
+
+.password-rules {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.rule {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.rule.valid {
+    color: #4CAF50;
+}
+
+.rule .check-icon {
+    color: #4CAF50;
+}
+
+.rule .cross-icon {
+    color: #94a3b8;
+}
+
+.rule span {
+    line-height: 1;
+}
