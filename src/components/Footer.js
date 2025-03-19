@@ -1,60 +1,154 @@
 import React from 'react';
-import './styles/Footer.css';
 import { Link } from 'react-router-dom';
+import { 
+    Twitter, 
+    Linkedin, 
+    Github, 
+    Mail,
+    LineChart,
+    Cpu,
+    Shield,
+    BookOpen,
+    Users,
+    HelpCircle
+} from 'lucide-react';
+import './styles/Footer.css';
 
 const Footer = () => {
-  return (
-    <footer className="footer">
-      <div className="footer-content">
-        <div className="footer-logo">
-          <img src={`${process.env.PUBLIC_URL}/logo.png`} alt="FutureXFinance Logo" />
-          <p>FutureXFinance</p>
-        </div>
-  
-        <div className="footer-connect">
-          <h4>Connect with Us</h4>
-          <Link to="https://x.com/FutureXFinance_">Twitter</Link>
-          <Link to="https://youtube.com">YouTube</Link>
-          <Link to="https://telegram.org">Telegram</Link>
-        </div>
-        <div className="footer-company">
-          <h4>Company</h4>
-          <Link to="/">Home</Link>
-          <Link to="/about">About Us</Link>
-          <Link to="/contact">Contact</Link>
-          <Link to="/news">News & Updates</Link>
-          <Link to="/pricing">Pricing</Link>
-          <Link to="/services">Services</Link>
-          <Link to="/careers">Careers</Link>
-        </div>
-        <div className="footer-platform">
-          <h4>Platform</h4>
-          <Link to="/market-data">Real-time Market Data</Link>
-          <Link to="/trading-bot">Smart Trading Bot</Link>
-          <Link to="/automated-tools">Automated Trading Tools</Link>
-          <Link to="/portfolio-manager">Portfolio Manager</Link>
-          <Link to="/investment-insights">AI-Driven Investment Insights</Link>
-          <Link to="/copy-traders">Copy Top Traders Portfolios</Link>
-          <Link to="/exchange-integrations">Crypto Exchange Integrations</Link>
-        </div>
-        <div className="footer-resources">
-          <h4>Resources</h4>
-          <Link to="/blog">Blog</Link>
-          <Link to="/faqs">FAQs</Link>
-          <Link to="/terms">Terms of Use</Link>
-          <Link to="/privacy">Privacy Policy</Link>
-          <Link to="/sitemap">Sitemap</Link>
-        </div>
-        <div className="footer-support">
-          <h4>Support</h4>
-          <Link to="/support">Customer Support</Link>
-          <Link to="/tutorials">Tutorials</Link>
-          <Link to="/partner-program">Partner Program</Link>
-        </div>
-      </div>
-      <p className='footer-copyright'>&copy; 2025 FutureXFinance. All Rights Reserved.</p>
-    </footer>
-  );
+    return (
+        <footer className="footer">
+            <div className="footer-content">
+                {/* Company Info Section */}
+                <div className="footer-section">
+                    <h3>FutureXFinance</h3>
+                    <p className="company-description">
+                        Empowering traders with cutting-edge high-frequency trading technology and advanced market analytics.
+                    </p>
+                    <div className="social-links">
+                        <a href="https://twitter.com/futurexfinance_" target="_blank" rel="noopener noreferrer">
+                            <Twitter size={20} />
+                        </a>
+                        <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer">
+                            <Linkedin size={20} />
+                        </a>
+                        <a href="https://github.com/FutureXFinance" target="_blank" rel="noopener noreferrer">
+                            <Github size={20} />
+                        </a>
+                    </div>
+                </div>
+
+                {/* Trading Solutions Section */}
+                <div className="footer-section">
+                    <h3>Trading Solutions</h3>
+                    <ul>
+                        <li>
+                            <Link to="/solutions/hft">
+                                <LineChart size={16} />
+                                <span>High-Frequency Trading</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/solutions/algorithmic">
+                                <Cpu size={16} />
+                                <span>Algorithmic Trading</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/solutions/risk-management">
+                                <Shield size={16} />
+                                <span>Risk Management</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/solutions/market-data">
+                                <LineChart size={16} />
+                                <span>Real-time Market Data</span>
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+
+                {/* Resources Section */}
+                <div className="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li>
+                            <Link to="/resources/documentation">
+                                <BookOpen size={16} />
+                                Documentation
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/resources/api">
+                                <Cpu size={16} />
+                                API Reference
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/resources/community">
+                                <Users size={16} />
+                                Community
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/resources/blog">
+                                <BookOpen size={16} />
+                                Trading Insights
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+
+                {/* Support Section */}
+                <div className="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li>
+                            <Link to="/support/help">
+                                <HelpCircle size={16} />
+                                Help Center
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/support/contact">
+                                <Mail size={16} />
+                                Contact Us
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/support/status">
+                                <Cpu size={16} />
+                                System Status
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+
+                {/* Contact Info Section */}
+                <div className="footer-section">
+                    <h3>Contact Us</h3>
+                    <div className="contact-info">
+                        <div className="contact-item">
+                            <Mail size={16} />
+                            <span>support@futurexfinance.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Bottom Bar */}
+            <div className="footer-bottom">
+                <div className="footer-bottom-content">
+                    <p>&copy; {new Date().getFullYear()} FutureXFinance. All rights reserved.</p>
+                    <div className="footer-bottom-links">
+                        <Link to="/privacy">Privacy Policy</Link>
+                        <Link to="/terms">Terms of Service</Link>
+                        <Link to="/compliance">Compliance</Link>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    );
 };
 
 export default Footer;
