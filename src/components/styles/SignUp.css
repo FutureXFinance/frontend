@@ -223,63 +223,24 @@
     cursor: pointer;
 }
 
-.otp-validation-icon {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-}
-
-.check-icon {
-    color: #4CAF50;
-    width: 20px;
-    height: 20px;
-}
-
-.cross-icon {
-    color: #f44336;
-    width: 20px;
-    height: 20px;
-}
-
-.loading-spinner {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #f3f3f3;
-    border-top: 2px solid #3498db;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
 .otp-input-container {
     display: flex;
     gap: 0.5rem;
-    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
     position: relative;
-    width: 100%;
 }
 
 .otp-input {
-    width: 45px;
-    height: 45px;
+    width: 3rem;
+    height: 3rem;
     text-align: center;
     font-size: 1.2rem;
+    border: 2px solid #333;
     border-radius: 8px;
-    border: 1.7px solid #25303e;
-    background-color: transparent;
-    color: white;
-    outline: none;
-    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    transition: all 0.3s ease;
 }
 
 .otp-input:focus {
@@ -311,9 +272,54 @@
 /* Update validation icon position for new layout */
 .otp-validation-icon {
     position: absolute;
-    right: -40px;
+    right: -2.5rem;
     top: 50%;
     transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: rgba(0, 255, 136, 0.1);
+    color: #00ff88;
+    font-size: 1rem;
+}
+
+.otp-validation-icon.error {
+    background: rgba(255, 0, 0, 0.1);
+    color: #ff0000;
+}
+
+.otp-validation-icon.verifying {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.check-icon {
+    color: #4CAF50;
+    width: 20px;
+    height: 20px;
+}
+
+.cross-icon {
+    color: #f44336;
+    width: 20px;
+    height: 20px;
+}
+
+.loading-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .password-rules {

@@ -9,8 +9,12 @@ const Home = () => {
           <h1><span className='title'>Future<span className="titleX">X</span>Finance</span></h1>
           <p className='subtitle'>Empowering traders with cutting-edge high-frequency trading technology and advanced market analytics.</p>
           <div className="hero-buttons">
-            <button className="primary-btn">Start Trading</button>
-            <button className="secondary-btn">View Demo</button>
+            <button className="primary-btn" onClick={() => window.location.href = '/signup'}>
+                Get Started
+            </button>
+            <button className="secondary-btn" onClick={() => window.location.href = '/about'}>
+                Learn More
+            </button>
           </div>
         </div>
       </section>
@@ -52,18 +56,24 @@ const Home = () => {
         <div className="resources-grid">
           <div className="resource-card">
             <h3>Documentation</h3>
-            <p>Comprehensive guides and API documentation</p>
-            <a href="#" className="resource-link">Learn More →</a>
+            <p>Comprehensive guides and API documentation to help you get started.</p>
+            <button className="resource-link" onClick={() => window.location.href = '/docs'}>
+                View Docs <span>→</span>
+            </button>
           </div>
           <div className="resource-card">
-            <h3>Trading Academy</h3>
-            <p>Learn advanced trading strategies</p>
-            <a href="#" className="resource-link">Start Learning →</a>
+            <h3>Community</h3>
+            <p>Join our community of traders and developers.</p>
+            <button className="resource-link" onClick={() => window.location.href = '/community'}>
+                Join Now <span>→</span>
+            </button>
           </div>
           <div className="resource-card">
-            <h3>Market Insights</h3>
-            <p>Daily market analysis and reports</p>
-            <a href="#" className="resource-link">View Reports →</a>
+            <h3>Support</h3>
+            <p>Get help and support from our dedicated team.</p>
+            <button className="resource-link" onClick={() => window.location.href = '/support'}>
+                Contact Us <span>→</span>
+            </button>
           </div>
         </div>
       </section>

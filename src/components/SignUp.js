@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import './styles/SignUp.css';
@@ -16,7 +16,6 @@ const SignUp = () => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [otpSent, setOtpSent] = useState(false);
-    const [otpInputVisible, setOtpInputVisible] = useState(false);
     const [isOtpValid, setIsOtpValid] = useState(false);
     const [isVerifying, setIsVerifying] = useState(false);
     const [otpFields, setOtpFields] = useState(['', '', '', '', '', '']);
@@ -44,7 +43,6 @@ const SignUp = () => {
             
             if (response.status === 200) {
                 setOtpSent(true);
-                setOtpInputVisible(true);
                 setError('');
                 setSuccess('OTP has been sent to your email!');
             }
@@ -76,6 +74,8 @@ const SignUp = () => {
                 setIsOtpValid(true);
                 setError('');
                 setSuccess('OTP verified successfully!');
+                // Focus the last OTP input to show the check mark
+                otpRefs[5].current.focus();
             } else {
                 setError(response.data.message || 'Invalid OTP.');
                 setSuccess('');
