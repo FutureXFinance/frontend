@@ -7,11 +7,13 @@ import { LockKeyhole, Check, X } from 'lucide-react';
 import config from '../config';
 
 const SignUp = () => {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+    });
     const [otp, setOtp] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
@@ -20,13 +22,10 @@ const SignUp = () => {
     const [isVerifying, setIsVerifying] = useState(false);
     const [otpFields, setOtpFields] = useState(['', '', '', '', '', '']);
     const [showPasswordRules, setShowPasswordRules] = useState(false);
-    const [passwordValidation, setPasswordValidation] = useState({
-        minLength: false,
-        hasUpperCase: false,
-        hasLowerCase: false,
-        hasNumber: false,
-        hasSpecialChar: false
-    });
+    const [isPasswordValid, setIsPasswordValid] = useState(false);
+    const [passwordsMatch, setPasswordsMatch] = useState(false);
+    const [isEmailVerified, setIsEmailVerified] = useState(false);
+    const [isOtpSent, setIsOtpSent] = useState(false);
     const otpRefs = [useRef(), useRef(), useRef(), useRef(), useRef(), useRef()];
     const navigate = useNavigate();
 
@@ -35,10 +34,10 @@ const SignUp = () => {
         setError('');
         setSuccess('');
         try {
-            console.log('Attempting to send OTP to:', email);
+            console.log('Attempting to send OTP to:', formData.email);
             console.log('Using API URL:', config.API_URL);
             
-            const response = await axios.post(`${config.API_URL}/send-otp`, { email });
+            const response = await axios.post(`${config.API_URL}/send-otp`, { email: formData.email });
             console.log('OTP Response:', response);
             
             if (response.status === 200) {
@@ -61,14 +60,14 @@ const SignUp = () => {
     };
 
     const verifyOtp = async (otpValue) => {
-        if (!email || !otpValue || otpValue.length !== 6) {
+        if (!formData.email || !otpValue || otpValue.length !== 6) {
             setIsOtpValid(false);
             return;
         }
 
         setIsVerifying(true);
         try {
-            const response = await axios.post(`${config.API_URL}/verify-otp`, { email, otp: otpValue });
+            const response = await axios.post(`${config.API_URL}/verify-otp`, { email: formData.email, otp: otpValue });
             
             if (response.status === 200 && response.data.isValid) {
                 setIsOtpValid(true);
@@ -143,7 +142,7 @@ const SignUp = () => {
         e.preventDefault();
         
         // Validate password before proceeding
-        if (!password || !confirmPassword || password !== confirmPassword) {
+        if (!formData.password || !formData.confirmPassword || formData.password !== formData.confirmPassword) {
             setError('Passwords do not match.');
             return;
         }
@@ -154,12 +153,12 @@ const SignUp = () => {
         }
 
         try {
-            console.log('Attempting registration with:', { firstName, lastName, email });
+            console.log('Attempting registration with:', { ...formData });
             const response = await axios.post(`${config.API_URL}/register`, {
-                firstName,
-                lastName,
-                email,
-                password,
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                email: formData.email,
+                password: formData.password,
             });
             
             if (response.status === 201) {
@@ -177,21 +176,44 @@ const SignUp = () => {
     };
 
     // Add password validation function
-    const validatePassword = (value) => {
-        setPasswordValidation({
-            minLength: value.length >= 8,
-            hasUpperCase: /[A-Z]/.test(value),
-            hasLowerCase: /[a-z]/.test(value),
-            hasNumber: /\d/.test(value),
-            hasSpecialChar: /[!@#$%^&*(),.?":{}|<>]/.test(value)
-        });
+    const validatePassword = (password) => {
+        const hasMinLength = password.length >= 8;
+        const hasUpperCase = /[A-Z]/.test(password);
+        const hasLowerCase = /[a-z]/.test(password);
+        const hasNumber = /\d/.test(password);
+        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+        
+        const isValid = hasMinLength && hasUpperCase && hasLowerCase && 
+                       hasNumber && hasSpecialChar;
+        setIsPasswordValid(isValid);
+        return isValid;
     };
 
     // Update password handler
     const handlePasswordChange = (e) => {
         const value = e.target.value;
-        setPassword(value);
+        setFormData({ ...formData, password: value });
         validatePassword(value);
+    };
+
+    // Handle password confirmation
+    const handleConfirmPassword = (confirmPassword) => {
+        setPasswordsMatch(confirmPassword === formData.password);
+    };
+
+    // Handle OTP button state
+    const isOtpButtonDisabled = () => {
+        return !formData.email || otpSent || isEmailVerified;
+    };
+
+    // Check if form is valid
+    const isFormValid = () => {
+        return formData.firstName.trim() !== '' &&
+               formData.lastName.trim() !== '' &&
+               formData.email.trim() !== '' &&
+               isOtpValid &&
+               isPasswordValid &&
+               passwordsMatch;
     };
 
     return (
@@ -210,8 +232,8 @@ const SignUp = () => {
                                     id="firstName"
                                     name="firstName"
                                     className="signUp-form-input"
-                                    value={firstName}
-                                    onChange={(e) => setFirstName(e.target.value)}
+                                    value={formData.firstName}
+                                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                                     placeholder="John"
                                     required
                                 />
@@ -223,8 +245,8 @@ const SignUp = () => {
                                     id="lastName"
                                     name="lastName"
                                     className="signUp-form-input"
-                                    value={lastName}
-                                    onChange={(e) => setLastName(e.target.value)}
+                                    value={formData.lastName}
+                                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                                     placeholder="Doe"
                                     required
                                 />
@@ -238,14 +260,19 @@ const SignUp = () => {
                                     id="email"
                                     name="email"
                                     className="signUp-form-input"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    value={formData.email}
+                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                     placeholder="me@example.com"
                                     required
                                 />
-                                {!otpSent && (
-                                    <button className="signUp-otp-button" onClick={handleSendOtp}>OTP</button>
-                                )}
+                                <button
+                                    type="button"
+                                    className="signUp-otp-button"
+                                    disabled={isOtpButtonDisabled()}
+                                    onClick={handleSendOtp}
+                                >
+                                    {otpSent ? 'Resend' : 'OTP'}
+                                </button>
                             </div>
                         </div>
                         {otpSent && (
@@ -288,7 +315,7 @@ const SignUp = () => {
                                 id="password"
                                 name="password"
                                 className="signUp-form-input"
-                                value={password}
+                                value={formData.password}
                                 onChange={handlePasswordChange}
                                 onFocus={() => setShowPasswordRules(true)}
                                 placeholder=""
@@ -296,36 +323,36 @@ const SignUp = () => {
                             />
                             {showPasswordRules && (
                                 <div className="password-rules">
-                                    <div className={`rule ${passwordValidation.minLength ? 'valid' : ''}`}>
-                                        {passwordValidation.minLength ? 
+                                    <div className={`rule ${isPasswordValid ? 'valid' : ''}`}>
+                                        {isPasswordValid ? 
                                             <Check size={12} className="check-icon" /> : 
                                             <X size={12} className="cross-icon" />
                                         }
                                         <span>At least 8 characters</span>
                                     </div>
-                                    <div className={`rule ${passwordValidation.hasUpperCase ? 'valid' : ''}`}>
-                                        {passwordValidation.hasUpperCase ? 
+                                    <div className={`rule ${isPasswordValid ? 'valid' : ''}`}>
+                                        {isPasswordValid ? 
                                             <Check size={12} className="check-icon" /> : 
                                             <X size={12} className="cross-icon" />
                                         }
                                         <span>One uppercase letter</span>
                                     </div>
-                                    <div className={`rule ${passwordValidation.hasLowerCase ? 'valid' : ''}`}>
-                                        {passwordValidation.hasLowerCase ? 
+                                    <div className={`rule ${isPasswordValid ? 'valid' : ''}`}>
+                                        {isPasswordValid ? 
                                             <Check size={12} className="check-icon" /> : 
                                             <X size={12} className="cross-icon" />
                                         }
                                         <span>One lowercase letter</span>
                                     </div>
-                                    <div className={`rule ${passwordValidation.hasNumber ? 'valid' : ''}`}>
-                                        {passwordValidation.hasNumber ? 
+                                    <div className={`rule ${isPasswordValid ? 'valid' : ''}`}>
+                                        {isPasswordValid ? 
                                             <Check size={12} className="check-icon" /> : 
                                             <X size={12} className="cross-icon" />
                                         }
                                         <span>One number</span>
                                     </div>
-                                    <div className={`rule ${passwordValidation.hasSpecialChar ? 'valid' : ''}`}>
-                                        {passwordValidation.hasSpecialChar ? 
+                                    <div className={`rule ${isPasswordValid ? 'valid' : ''}`}>
+                                        {isPasswordValid ? 
                                             <Check size={12} className="check-icon" /> : 
                                             <X size={12} className="cross-icon" />
                                         }
@@ -341,15 +368,22 @@ const SignUp = () => {
                                 id="confirmPassword"
                                 name="confirmPassword"
                                 className="signUp-form-input"
-                                value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                value={formData.confirmPassword}
+                                onChange={(e) => {
+                                    setFormData({ ...formData, confirmPassword: e.target.value });
+                                    handleConfirmPassword(e.target.value);
+                                }}
                                 placeholder=""
                                 required
                             />
                         </div>
                         {error && <div className="signUp-error-message">{error}</div>}
                         {success && <div className="signUp-success-message">{success}</div>}
-                        <button type="submit" className="signUp-submit-button">
+                        <button
+                            type="submit"
+                            className="signUp-submit-button"
+                            disabled={!isFormValid()}
+                        >
                             Sign Up
                         </button>
                     </form>

@@ -3,111 +3,119 @@
     min-height: 92vh;
     width: 100%;
     display: flex;
-  }
+}
 
-  .signUp-form-container {
+.signUp-form-container {
     width: 100%;
     background-color: #000;
     padding: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  
-  @media (min-width: 1024px) {
-    .signUp-form-container {
-      width: 100%;
-    }
-  }
-  
-  .signUp-form-wrapper { 
+}
+
+.signUp-form-wrapper { 
     width: 100%;
-    max-width: 25rem;
+    max-width: 28rem;
     padding: 2.5rem;
-    border-radius: 5%;
+    border-radius: 24px;
     background-color: #43434339;
-  }
-  
-  .signUp-logo-container { 
+}
+
+.signUp-logo-container { 
     display: flex;
     justify-content: center;
-    margin-bottom: 3rem;
-  }
-  
-  .signUp-logo-text { 
+    margin-bottom: 2.5rem;
+}
+
+.signUp-logo-text { 
     color: white;
     font-size: 1.875rem;
     font-weight: 700;
-  }
-  
-  /* Form styles */
-  .signUp-auth-form { 
+}
+
+/* Form styles */
+.signUp-auth-form { 
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  .signUp-name-fields { 
+    gap: 1.25rem;
+}
+
+.signUp-name-fields { 
     display: flex;
     gap: 1rem;
     width: 100%;
-  }
-  
-  .signUp-form-group { 
+}
+
+.signUp-form-group { 
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     flex: 1;
     width: 100%;
-  }
-  
-  .signUp-form-group label { 
+    position: relative;
+    min-width: 0;
+}
+
+.signUp-form-group label { 
     text-align: left;
     color: #94a3b8;
     font-size: 0.875rem;
-  }
-  
-  .signUp-form-input { 
+}
+
+.signUp-form-input { 
     width: 100%;
-    padding: 0.75rem 1rem;
+    height: 42px;
+    padding: 0 1rem;
     border-radius: 0.5rem;
     background-color: transparent;
     color: white;
-    border: 1.7px solid #25303e;
+    border: 2px solid #334155;
     outline: none;
     transition: all 0.2s ease;
-    padding-right: 40px !important; /* Make room for the validation icon */
     box-sizing: border-box;
-  }
-  
-  .signUp-form-input:focus { 
+    font-size: 0.875rem;
+}
+
+.signUp-form-input:focus { 
     border-color: #3b82f6;
-  }
-  
-  .signUp-submit-button { 
+    border-width: 2px;
+}
+
+.signUp-submit-button { 
     width: 100%;
     padding: 0.75rem;
     border-radius: 0.5rem;
     background-color: #3b82f6;
     color: white;
     font-weight: 600;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
     border: none;
     cursor: pointer;
-  }
-  
-  .signUp-submit-button:hover { 
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signUp-submit-button:hover:not(:disabled) {
     background-color: #2563eb;
-  }
-  
-  .signUp-additional-options { 
+}
+
+.signUp-submit-button:disabled {
+    background-color: #3b82f6;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.signUp-additional-options { 
     margin-top: 2rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-  }
-  
-  .signUp-secondary-button { 
+}
+
+.signUp-secondary-button { 
     width: 100%;
     padding: 0.75rem 0rem;
     border-radius: 0.5rem;
@@ -124,26 +132,26 @@
     position: relative;
     text-decoration: none;
     gap: 0.5rem;
-  }
-  
-  .signUp-secondary-button:hover { 
+}
+
+.signUp-secondary-button:hover { 
     background-color: #1a1d20;
-  }
-  
-  .signUp-secondary-button > span {
+}
+
+.signUp-secondary-button > span {
     white-space: nowrap;
-  }
-  
-  .signUp-secondary-button > :first-child { 
+}
+
+.signUp-secondary-button > :first-child { 
     padding: 0 0.5rem 0 1rem;
     margin-top: 1.7px;
-  }
-  
-  .signUp-secondary-button > :last-child { 
+}
+
+.signUp-secondary-button > :last-child { 
     padding-right: 1rem;
-  }
-  
-  @media (max-width: 480px) {
+}
+
+@media (max-width: 480px) {
     .signUp-secondary-button {
         font-size: 0.75rem;
         padding: 0.5rem 0;
@@ -156,14 +164,14 @@
     .signUp-secondary-button > :last-child {
         padding-right: 0.5rem;
     }
-  }
-  
-  /* Animation for form transitions */
-  .signUp-auth-form { 
+}
+
+/* Animation for form transitions */
+.signUp-auth-form { 
     animation: fadeIn 0.3s ease;
-  }
-  
-  @keyframes fadeIn {
+}
+
+@keyframes fadeIn {
     from {
       opacity: 0;
       transform: translateY(10px);
@@ -172,38 +180,116 @@
       opacity: 1;
       transform: translateY(0);
     }
-  }
-  
-  /* Error states */
-  .signUp-form-input.error { 
+}
+
+/* Error states */
+.signUp-form-input.error { 
     border-color: #ef4444;
-  }
-  
-  .signUp-error-message { 
+}
+
+.signUp-error-message { 
     color: #ef4444;
     font-size: 0.875rem;
     margin-top: 0.25rem;
-  }
+}
 
-  ::placeholder{
+::placeholder{
     color: rgba(255, 255, 255, 0.3);
-  }
+}
 
-  .signUp-email-otp-container {
+.signUp-email-otp-container {
     display: flex;
-    align-items: center; /* Vertically align items */
-    justify-content: space-between; /* Distribute space between email and button */
+    align-items: flex-end;
+    gap: 16px;
+    width: 100%;
+    position: relative;
+}
+
+.signUp-email-otp-container .signUp-form-group {
+    flex: 1;
+    max-width: 75%;
+    min-width: 0;
 }
 
 .signUp-otp-button {
-    /* Style your Send OTP button */
-    margin-left: 1rem; /* Add spacing between input and button */
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
+    height: 42px;
+    min-width: 65px;
+    padding: 0 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #fff;
     background-color: #3b82f6;
-    color: white;
     border: none;
+    border-radius: 6px;
     cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signUp-otp-button:hover:not(:disabled) {
+    background-color: #2563eb;
+}
+
+.signUp-otp-button:disabled {
+    background-color: #3b82f6;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+    .signUp-email-otp-container {
+        gap: 14px;
+    }
+
+    .signUp-email-otp-container .signUp-form-group {
+        max-width: 80%;
+    }
+
+    .signUp-form-input,
+    .signUp-otp-button {
+        height: 40px;
+    }
+
+    .signUp-otp-button {
+        min-width: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .signUp-email-otp-container {
+        gap: 12px;
+    }
+
+    .signUp-email-otp-container .signUp-form-group {
+        max-width: 82%;
+    }
+
+    .signUp-form-input,
+    .signUp-otp-button {
+        height: 38px;
+    }
+
+    .signUp-otp-button {
+        min-width: 55px;
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .signUp-email-otp-container {
+        gap: 10px;
+    }
+
+    .signUp-email-otp-container .signUp-form-group {
+        max-width: 85%;
+    }
+
+    .signUp-otp-button {
+        min-width: 50px;
+        font-size: 0.65rem;
+    }
 }
 
 .signUp-otp-verify-container {
@@ -213,7 +299,6 @@
 }
 
 .signUp-verify-button {
-    /* Style your Verify OTP button */
     margin-left: 1rem;
     padding: 0.75rem 1rem;
     border-radius: 0.5rem;
@@ -221,21 +306,32 @@
     color: white;
     border: none;
     cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.signUp-verify-button:hover:not(:disabled) {
+    background-color: #2563eb;
+}
+
+.signUp-verify-button:disabled {
+    background-color: #3b82f6;
+    cursor: not-allowed;
+    opacity: 0.5;
 }
 
 .otp-input-container {
     display: flex;
     gap: 0.5rem;
     justify-content: center;
-    margin-bottom: 1rem;
+    margin: 1rem 0;
     position: relative;
 }
 
 .otp-input {
-    width: 3rem;
-    height: 3rem;
+    width: 2.75rem;
+    height: 2.75rem;
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     border: 2px solid #333;
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.05);
@@ -272,18 +368,14 @@
 /* Update validation icon position for new layout */
 .otp-validation-icon {
     position: absolute;
-    right: -2.5rem;
+    right: -2rem;
     top: 50%;
     transform: translateY(-50%);
+    width: 1.5rem;
+    height: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
-    background: rgba(0, 255, 136, 0.1);
-    color: #00ff88;
-    font-size: 1rem;
 }
 
 .otp-validation-icon.error {
@@ -351,4 +443,143 @@
 
 .rule span {
     line-height: 1;
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+    .signUp-form-wrapper {
+        max-width: 26rem;
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .signUp-form-container {
+        padding: 1.5rem;
+    }
+
+    .signUp-form-wrapper {
+        max-width: 24rem;
+        padding: 1.75rem;
+        border-radius: 20px;
+    }
+
+    .signUp-logo-text {
+        font-size: 1.625rem;
+    }
+
+    .signUp-auth-form {
+        gap: 1rem;
+    }
+
+    .signUp-name-fields {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .signUp-form-input {
+        height: 40px;
+        font-size: 0.85rem;
+    }
+
+    .signUp-otp-button {
+        height: 40px;
+        width: 55px;
+    }
+
+    .otp-input {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .signUp-form-container {
+        padding: 1rem;
+    }
+
+    .signUp-form-wrapper {
+        max-width: 100%;
+        padding: 1.5rem;
+        border-radius: 16px;
+    }
+
+    .signUp-logo-text {
+        font-size: 1.5rem;
+    }
+
+    .signUp-logo-container {
+        margin-bottom: 2rem;
+    }
+
+    .signUp-form-group label {
+        font-size: 0.8125rem;
+    }
+
+    .signUp-form-input {
+        height: 38px;
+        padding: 0.625rem 0.875rem;
+        font-size: 0.8125rem;
+    }
+
+    .signUp-otp-button {
+        height: 38px;
+        width: 50px;
+        font-size: 0.7rem;
+    }
+
+    .otp-input-container {
+        gap: 0.375rem;
+    }
+
+    .otp-input {
+        width: 2.25rem;
+        height: 2.25rem;
+        font-size: 0.875rem;
+    }
+
+    .password-rules {
+        margin-top: 0.5rem;
+        gap: 0.25rem;
+    }
+
+    .rule {
+        font-size: 0.75rem;
+        gap: 0.375rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .signUp-form-wrapper {
+        padding: 1.25rem;
+    }
+
+    .signUp-logo-text {
+        font-size: 1.375rem;
+    }
+
+    .signUp-form-input {
+        font-size: 0.8rem;
+    }
+
+    .signUp-otp-button {
+        width: 45px;
+        font-size: 0.65rem;
+    }
+
+    .otp-input {
+        width: 2rem;
+        height: 2rem;
+        font-size: 0.8125rem;
+    }
+}
+
+/* Validation icons and animations */
+@media (max-width: 480px) {
+    .otp-validation-icon {
+        right: -1.5rem;
+        width: 1.25rem;
+        height: 1.25rem;
+    }
 }

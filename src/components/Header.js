@@ -28,8 +28,8 @@ const Header = () => {
         <Link to="#support">Support</Link>
       </nav>
       <div className={`right ${isMenuOpen ? 'open' : ''}`}>
-        <Link to="#free-trial" className="button">Free Trial</Link>
-        <Link className='button' onClick={toggleMenu} to = "/SignIn">Sign In</Link>
+      <Link className='button' onClick={toggleMenu} to = "/SignIn">Sign In</Link>
+        <Link className='button' onClick={toggleMenu} to = "/SignUp">Sign Up</Link>
       </div>
     </header>
   );
