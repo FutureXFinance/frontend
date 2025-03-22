@@ -72,8 +72,8 @@ body {
 }
 
 .social-links a:hover {
-    color: #00ff88;
-    background-color: rgba(0, 255, 136, 0.1);
+    color: #3b82f6;
+    background-color: rgba(59, 130, 246, 0.1);
     transform: translateY(-2px);
 }
 
@@ -100,7 +100,7 @@ body {
 }
 
 .footer-section ul li a:hover {
-    color: #00ff88;
+    color: #3b82f6;
     transform: translateX(5px);
 }
 
@@ -137,8 +137,8 @@ body {
 }
 
 .contact-item svg {
-    color: #00ff88;
-    background-color: rgba(0, 255, 136, 0.1);
+    color: #3b82f6;
+    background-color: rgba(59, 130, 246, 0.1);
     padding: 0.5rem;
     border-radius: 50%;
     width: 14px;
@@ -189,12 +189,12 @@ body {
     height: 1px;
     bottom: -2px;
     left: 0;
-    background-color: #00ff88;
+    background-color: #3b82f6;
     transition: width 0.3s ease;
 }
 
 .footer-bottom-links a:hover {
-    color: #00ff88;
+    color: #3b82f6;
 }
 
 .footer-bottom-links a:hover::after {
