@@ -212,20 +212,23 @@
 }
 
 .signUp-otp-button {
-    height: 42px;
-    min-width: 65px;
-    padding: 0 8px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: #fff;
     background-color: #3b82f6;
     border: none;
-    border-radius: 6px;
+    border-radius: 0.5rem;
+    color: #fff;
     cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin-left: 1rem;
+    padding: 0.75rem 1rem;
+    font-family: Poppins, sans-serif;
+    text-align: center;
+    display: inline-block;
+    box-sizing: border-box;
+    line-height: normal;
+    text-transform: none;
+    letter-spacing: normal;
+    word-spacing: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .signUp-otp-button:hover:not(:disabled) {
@@ -253,7 +256,8 @@
     }
 
     .signUp-otp-button {
-        min-width: 60px;
+        padding: 0.65rem 0.875rem;
+        font-size: 0.875rem;
     }
 }
 
@@ -272,8 +276,8 @@
     }
 
     .signUp-otp-button {
-        min-width: 55px;
-        font-size: 0.7rem;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8125rem;
     }
 }
 
@@ -287,8 +291,8 @@
     }
 
     .signUp-otp-button {
-        min-width: 50px;
-        font-size: 0.65rem;
+        padding: 0.5rem 0.625rem;
+        font-size: 0.75rem;
     }
 }
 
