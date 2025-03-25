@@ -13,8 +13,7 @@ import {
     CheckIcon, 
     XIcon, 
     Chrome, 
-    Apple, 
-    Facebook, 
+    Apple,
     LockKeyholeIcon,
     Loader2Icon,
     GlobeIcon,
@@ -234,11 +233,19 @@ const SignUp = () => {
         setPasswordsMatch(confirmPassword === formData.password);
     };
 
-    const handleSocialSignup = async (provider) => {
+    const handleGoogleSignUp = async () => {
         try {
-            window.location.href = `${config.API_URL}/auth/${provider}/signup`;
+            window.location.href = `${config.API_URL}/auth/google/signup`;
         } catch (error) {
-            setError(`Failed to connect with ${provider}`);
+            setError('Failed to connect with Google');
+        }
+    };
+
+    const handleAppleSignUp = async () => {
+        try {
+            window.location.href = `${config.API_URL}/auth/apple/signup`;
+        } catch (error) {
+            setError('Failed to connect with Apple');
         }
     };
 
@@ -480,13 +487,13 @@ const SignUp = () => {
                     </form>
                     <div className="signUp-additional-options">
                         <div className="signUp-divider">
-                            <span>or</span>
+                            <span>or continue with</span>
                         </div>
                         <div className="signUp-social-buttons">
                             <button
                                 type="button"
                                 className="signUp-social-button google"
-                                onClick={() => handleSocialSignup('google')}
+                                onClick={handleGoogleSignUp}
                                 disabled={isLoading}
                             >
                                 <Chrome size={20} />
@@ -495,26 +502,16 @@ const SignUp = () => {
                             <button
                                 type="button"
                                 className="signUp-social-button apple"
-                                onClick={() => handleSocialSignup('apple')}
+                                onClick={handleAppleSignUp}
                                 disabled={isLoading}
                             >
                                 <Apple size={20} />
                                 Continue with Apple
                             </button>
-                            <button
-                                type="button"
-                                className="signUp-social-button facebook"
-                                onClick={() => handleSocialSignup('facebook')}
-                                disabled={isLoading}
-                            >
-                                <Facebook size={20} />
-                                Continue with Facebook
-                            </button>
                         </div>
                         <Link to="/signin" className="signUp-secondary-button">
-                            <span><LockKeyholeIcon size={16} /></span>
-                            <span>Already have an account?</span>
-                            <span>Sign In</span>
+                            <LockKeyholeIcon size={16} />
+                            Already have an account? Sign In
                         </Link>
                     </div>
                 </div>

@@ -200,8 +200,10 @@ body {
 .signIn-social-buttons,
 .signUp-social-buttons {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     gap: var(--space-md);
+    margin: var(--space-lg) 0;
+    width: 100%;
 }
 
 .signIn-social-button,
@@ -209,21 +211,50 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
-    background: transparent;
-    border: 1px solid var(--border-color);
+    width: 100%;
+    padding: 0.875rem;
+    gap: 0.75rem;
     border-radius: var(--radius-md);
-    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
     transition: all var(--transition-normal);
 }
 
-.signIn-social-button:hover:not(:disabled),
-.signUp-social-button:hover:not(:disabled) {
-    border-color: var(--primary-color);
-    color: var(--primary-color);
-    background: rgba(59, 130, 246, 0.05);
+.signIn-social-button.google,
+.signUp-social-button.google {
+    background: #ffffff;
+    color: #3c4043;
+    border: 1px solid #dadce0;
+}
+
+.signIn-social-button.google:hover,
+.signUp-social-button.google:hover {
+    background: #f8f9fa;
+    box-shadow: 0 1px 3px rgba(60,64,67,0.3);
     transform: translateY(-1px);
+}
+
+.signIn-social-button.apple,
+.signUp-social-button.apple {
+    background: #000000;
+    color: #ffffff;
+    border: 1px solid #333333;
+}
+
+.signIn-social-button.apple:hover,
+.signUp-social-button.apple:hover {
+    background: #1a1a1a;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    transform: translateY(-1px);
+}
+
+.signIn-social-button:disabled,
+.signUp-social-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }
 
 /* Divider styles */

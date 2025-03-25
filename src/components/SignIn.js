@@ -92,14 +92,19 @@ const SignIn = () => {
         }
     };
 
-    const handleSocialLogin = async (provider) => {
-        setIsLoading(true);
-        setError('');
+    const handleGoogleSignIn = async () => {
         try {
-            window.location.href = `/api/auth/${provider}`;
-        } catch (err) {
-            setError('Social login failed. Please try again.');
-            setIsLoading(false);
+            window.location.href = `${config.API_URL}/auth/google/signin`;
+        } catch (error) {
+            setError('Failed to connect with Google');
+        }
+    };
+
+    const handleAppleSignIn = async () => {
+        try {
+            window.location.href = `${config.API_URL}/auth/apple/signin`;
+        } catch (error) {
+            setError('Failed to connect with Apple');
         }
     };
 
@@ -238,32 +243,26 @@ const SignIn = () => {
 
                             <div className="signIn-additional-options">
                                 <div className="signIn-divider">
-                                    <span>Or continue with</span>
+                                    <span>or continue with</span>
                                 </div>
                                 <div className="signIn-social-buttons">
                                     <button
                                         type="button"
-                                        className="signIn-social-button"
-                                        onClick={() => handleSocialLogin('google')}
+                                        className="signIn-social-button google"
+                                        onClick={handleGoogleSignIn}
                                         disabled={isLoading}
                                     >
                                         <Chrome size={20} />
+                                        Continue with Google
                                     </button>
                                     <button
                                         type="button"
-                                        className="signIn-social-button"
-                                        onClick={() => handleSocialLogin('apple')}
+                                        className="signIn-social-button apple"
+                                        onClick={handleAppleSignIn}
                                         disabled={isLoading}
                                     >
                                         <Apple size={20} />
-                                    </button>
-                                    <button
-                                        type="button"
-                                        className="signIn-social-button"
-                                        onClick={() => handleSocialLogin('facebook')}
-                                        disabled={isLoading}
-                                    >
-                                        <FacebookIcon size={20} />
+                                        Continue with Apple
                                     </button>
                                 </div>
                             </div>
