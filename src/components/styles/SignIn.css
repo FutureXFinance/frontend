@@ -5,7 +5,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background: #0b0e11;
+    background: var(--background-color);
 }
 
 .signIn-container::before {
@@ -15,7 +15,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at top, rgba(59, 130, 246, 0.03), transparent 70%);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), transparent 70%);
     pointer-events: none;
     z-index: -1;
 }
@@ -23,18 +23,15 @@
 .signIn-header {
     padding: var(--space-lg) var(--space-2xl);
     border-bottom: 1px solid var(--border-color);
-    backdrop-filter: blur(8px);
+    background-color: var(--surface-color);
     position: relative;
 }
 
 .signIn-logo h1 {
-    color: var(--text-primary);
+    color: var(--primary-color);
     font-size: 1.5rem;
-    font-weight: 600;
-    background: linear-gradient(to right, var(--text-primary), var(--text-secondary));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
 .signIn-form-container {
@@ -42,16 +39,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
+    padding: var(--space-xl);
 }
 
 .signIn-form-wrapper {
     position: relative;
     overflow: hidden;
-    background: #1e2329;
-    border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    padding: 2.5rem;
+    background: var(--surface-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: var(--space-2xl);
     width: 100%;
     max-width: 480px;
 }
@@ -62,9 +59,9 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 1px;
+    height: 2px;
     background: linear-gradient(to right, transparent, var(--primary-color), transparent);
-    opacity: 0.3;
+    opacity: 0.5;
 }
 
 .signIn-welcome {
@@ -74,7 +71,7 @@
 
 .signIn-welcome h2 {
     font-size: 1.75rem;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text-primary);
     margin-bottom: var(--space-xs);
     letter-spacing: -0.02em;
@@ -100,8 +97,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
-    padding: 0.75rem;
+    gap: var(--space-sm);
+    padding: var(--space-sm);
     background: transparent;
     border: none;
     color: var(--text-secondary);
@@ -131,13 +128,13 @@
 
 .method-button:hover:not(.active) {
     color: var(--text-primary);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(37, 99, 235, 0.05);
 }
 
 .signIn-auth-form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: var(--space-lg);
 }
 
 .signIn-form-group {
@@ -156,8 +153,8 @@
 
 .signIn-input-icon {
     position: absolute;
-    left: 1rem;
-    color: var(--text-secondary);
+    left: var(--space-md);
+    color: var(--text-tertiary);
     width: 18px;
     height: 18px;
     transition: color var(--transition-normal);
@@ -170,30 +167,30 @@
 .signIn-form-input {
     width: 100%;
     padding: 0.875rem 1rem 0.875rem 2.75rem;
-    border: 1px solid #363a3d;
-    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
     font-size: 0.95rem;
-    background: #2b3139;
-    color: #eaecef;
-    transition: all 0.3s ease;
+    background: var(--surface-light);
+    color: var(--text-primary);
+    transition: all var(--transition-normal);
 }
 
 .signIn-form-input:focus {
     outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
 .signIn-form-input::placeholder {
-    color: #848e9c;
+    color: var(--text-tertiary);
 }
 
 .signIn-password-toggle {
     position: absolute;
-    right: 1rem;
+    right: var(--space-md);
     background: none;
     border: none;
-    color: var(--text-secondary);
+    color: var(--text-tertiary);
     cursor: pointer;
     padding: var(--space-xs);
     transition: all var(--transition-normal);
@@ -259,26 +256,28 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: var(--space-sm);
     width: 100%;
     padding: 0.875rem;
-    background: #2563eb;
-    color: #ffffff;
+    background: var(--primary-color);
+    color: white;
     border: none;
-    border-radius: 8px;
-    font-size: 1rem;
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--transition-normal);
     margin: var(--space-lg) 0;
 }
 
 .signIn-submit-button:hover:not(:disabled) {
-    background: #1d4ed8;
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
 }
 
 .signIn-submit-button:disabled {
-    background: #1e40af;
+    background: var(--primary-active);
     cursor: not-allowed;
     opacity: 0.7;
 }
@@ -287,22 +286,22 @@
 .signIn-success-message {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem;
-    border-radius: 8px;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
     font-size: 0.9rem;
 }
 
 .signIn-error-message {
-    background: rgba(246, 70, 93, 0.1);
-    color: #f6465d;
-    border: 1px solid rgba(246, 70, 93, 0.2);
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--error-color);
+    border: 1px solid var(--error-color);
 }
 
 .signIn-success-message {
-    background: rgba(14, 203, 129, 0.1);
-    color: #0ecb81;
-    border: 1px solid rgba(14, 203, 129, 0.2);
+    background: rgba(34, 197, 94, 0.1);
+    color: var(--success-color);
+    border: 1px solid var(--success-color);
 }
 
 .signIn-additional-options {
@@ -348,7 +347,7 @@
     left: 50%;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 50%);
     transform: translate(-50%, -50%) scale(0);
     transition: transform 0.5s;
 }
@@ -377,11 +376,11 @@
 
 .qr-placeholder:hover {
     border-color: var(--primary-color);
-    background: rgba(59, 130, 246, 0.05);
+    background: rgba(37, 99, 235, 0.05);
 }
 
 .qr-placeholder svg {
-    color: var(--text-secondary);
+    color: var(--text-tertiary);
     transition: color var(--transition-normal);
 }
 
