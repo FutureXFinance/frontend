@@ -1,30 +1,381 @@
+/* Shared styles for SignIn and SignUp components */
+:root {
+    /* Colors */
+    --primary-color: #3b82f6;
+    --primary-hover: #2563eb;
+    --primary-active: #1d4ed8;
+    --secondary-color: #1E2329;
+    --background-color: #000000;
+    --surface-color: #1E2329;
+    --surface-light: #2B3139;
+    --text-primary: #FFFFFF;
+    --text-secondary: #848e9c;
+    --text-tertiary: #646B75;
+    --error-color: #F6465D;
+    --success-color: #0ECB81;
+    --border-color: #363a3d;
+    --focus-ring: rgba(59, 130, 246, 0.1);
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
+    
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    
+    /* Border Radius */
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+    
+    /* Spacing */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 2.5rem;
+}
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+}
+
+/* Form container styles */
+.signIn-container,
+.signUp-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background-color);
+    background-image: radial-gradient(circle at center top, rgba(59, 130, 246, 0.03), transparent 70%);
+}
+
+.signIn-form-container,
+.signUp-form-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-xl);
+}
+
+.signIn-form-wrapper,
+.signUp-form-wrapper {
+    background-color: var(--surface-color);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2xl);
+    width: 100%;
+    max-width: 480px;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border-color);
+}
+
+/* Logo styles */
+.signIn-logo-container,
+.signUp-logo-container {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.signIn-logo-text,
+.signUp-logo-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* Form group styles */
+.signIn-form-group,
+.signUp-form-group {
+    margin-bottom: 1.5rem;
+}
+
+.signIn-form-group label,
+.signUp-form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+/* Input styles */
+.signIn-input-wrapper,
+.signUp-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: var(--surface-light);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-normal);
+}
+
+.signIn-input-wrapper:focus-within,
+.signUp-input-wrapper:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+.signIn-input-icon,
+.signUp-input-icon {
+    color: var(--text-secondary);
+    margin-right: 0.5rem;
+}
+
+.signIn-form-input,
+.signUp-form-input {
+    width: 100%;
+    padding: 0.875rem 1rem 0.875rem 2.75rem;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    transition: all var(--transition-normal);
+}
+
+.signIn-form-input::placeholder,
+.signUp-form-input::placeholder {
+    color: var(--text-secondary);
+}
+
+/* Button styles */
+.signIn-submit-button,
+.signUp-submit-button {
+    width: 100%;
+    padding: 0.875rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.signIn-submit-button:hover:not(:disabled),
+.signUp-submit-button:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.signIn-submit-button:active:not(:disabled),
+.signUp-submit-button:active:not(:disabled) {
+    background-color: var(--primary-active);
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+
+.signIn-submit-button:disabled,
+.signUp-submit-button:disabled {
+    background-color: var(--primary-active);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Social buttons */
+.signIn-social-buttons,
+.signUp-social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
+}
+
+.signIn-social-button,
+.signUp-social-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    transition: all var(--transition-normal);
+}
+
+.signIn-social-button:hover:not(:disabled),
+.signUp-social-button:hover:not(:disabled) {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    background: rgba(59, 130, 246, 0.05);
+    transform: translateY(-1px);
+}
+
+/* Divider styles */
+.signIn-divider,
+.signUp-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 1.5rem 0;
+    color: var(--text-secondary);
+}
+
+.signIn-divider::before,
+.signIn-divider::after,
+.signUp-divider::before,
+.signUp-divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.signIn-divider span,
+.signUp-divider span {
+    padding: 0 1rem;
+}
+
+/* Message styles */
+.signIn-error-message,
+.signUp-error-message,
 .signIn-success-message,
 .signUp-success-message {
-    color: #4CAF50;
-    padding: 10px;
-    margin-bottom: 15px;
-    text-align: center;
-    font-size: 14px;
-    animation: fadeIn 0.3s ease-in;
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: 0.95rem;
+    animation: messageSlideIn 0.3s ease;
 }
 
 .signIn-error-message,
 .signUp-error-message {
-    color: #ef4444;
-    padding: 10px;
-    margin-bottom: 15px;
-    text-align: center;
-    font-size: 14px;
-    animation: fadeIn 0.3s ease-in;
+    background-color: rgba(246, 70, 93, 0.1);
+    color: var(--error-color);
+    border: 1px solid var(--error-color);
 }
 
-@keyframes fadeIn {
+.signIn-success-message,
+.signUp-success-message {
+    background-color: rgba(14, 203, 129, 0.1);
+    color: var(--success-color);
+    border: 1px solid var(--success-color);
+}
+
+/* Loading spinner */
+.loading-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
     from {
-        opacity: 0;
-        transform: translateY(-10px);
+        transform: rotate(0deg);
     }
     to {
-        opacity: 1;
-        transform: translateY(0);
+        transform: rotate(360deg);
+    }
+}
+
+/* Terms modal */
+.signUp-terms-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.signUp-terms-content {
+    background-color: var(--surface-color);
+    border-radius: 8px;
+    padding: 2rem;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+/* Security banner */
+.signUp-security-banner {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: rgba(14, 203, 129, 0.1);
+    color: var(--success-color);
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+}
+
+/* Terms section */
+.signUp-terms-section {
+    margin: 1.5rem 0;
+}
+
+.signUp-terms-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.signUp-terms-checkbox button {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    padding: 0;
+    font-size: 0.875rem;
+}
+
+.signUp-terms-checkbox button:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .signIn-form-container,
+    .signUp-form-container {
+        padding: var(--space-md);
+    }
+    
+    .signIn-form-wrapper,
+    .signUp-form-wrapper {
+        padding: var(--space-xl);
+    }
+}
+
+@media (max-width: 480px) {
+    .signIn-form-wrapper,
+    .signUp-form-wrapper {
+        padding: var(--space-lg);
+    }
+    
+    .signIn-form-input,
+    .signUp-form-input {
+        font-size: 0.875rem;
     }
 } 

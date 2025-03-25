@@ -3,7 +3,25 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import './styles/SignUp.css';
 import './styles/shared.css';
-import { LockKeyhole, Check, X } from 'lucide-react';
+import { 
+    MailIcon, 
+    LockIcon, 
+    EyeIcon, 
+    EyeOffIcon, 
+    UserIcon, 
+    UserPlusIcon, 
+    CheckIcon, 
+    XIcon, 
+    Chrome, 
+    Apple, 
+    Facebook, 
+    LockKeyholeIcon,
+    Loader2Icon,
+    GlobeIcon,
+    BellIcon,
+    ShieldCheckIcon,
+    AlertCircleIcon
+} from 'lucide-react';
 import config from '../config';
 
 const SignUp = () => {
@@ -14,31 +32,46 @@ const SignUp = () => {
         password: '',
         confirmPassword: ''
     });
-    const [otp, setOtp] = useState('');
+    const [otp, setOtp] = useState(['', '', '', '', '', '']);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [otpSent, setOtpSent] = useState(false);
     const [isOtpValid, setIsOtpValid] = useState(false);
     const [isVerifying, setIsVerifying] = useState(false);
     const [otpFields, setOtpFields] = useState(['', '', '', '', '', '']);
-    const [showPasswordRules, setShowPasswordRules] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [isPasswordValid, setIsPasswordValid] = useState(false);
     const [passwordsMatch, setPasswordsMatch] = useState(false);
     const [isEmailVerified, setIsEmailVerified] = useState(false);
-    const [isOtpSent, setIsOtpSent] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [showPasswordRules, setShowPasswordRules] = useState(false);
     const otpRefs = [useRef(), useRef(), useRef(), useRef(), useRef(), useRef()];
     const navigate = useNavigate();
+    const [selectedLanguage, setSelectedLanguage] = useState('English');
+    const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
+    const [showTerms, setShowTerms] = useState(false);
+    const [acceptedTerms, setAcceptedTerms] = useState(false);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
 
     const handleSendOtp = async (e) => {
         e.preventDefault();
         setError('');
         setSuccess('');
+        setIsLoading(true);
+        
         try {
-            console.log('Attempting to send OTP to:', formData.email);
-            console.log('Using API URL:', config.API_URL);
-            
-            const response = await axios.post(`${config.API_URL}/send-otp`, { email: formData.email });
-            console.log('OTP Response:', response);
+            const response = await axios.post(`${config.API_URL}/send-otp`, { 
+                email: formData.email,
+                type: 'registration'
+            });
             
             if (response.status === 200) {
                 setOtpSent(true);
@@ -46,8 +79,6 @@ const SignUp = () => {
                 setSuccess('OTP has been sent to your email!');
             }
         } catch (error) {
-            console.error('OTP Send Error:', error);
-            // Handle specific error cases
             if (error.response?.status === 409) {
                 setError('This email is already registered. Please sign in instead.');
             } else if (error.response?.status === 400) {
@@ -56,6 +87,8 @@ const SignUp = () => {
                 setError(error.response?.data?.message || 'Error sending OTP. Please try again.');
             }
             setSuccess('');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -67,13 +100,17 @@ const SignUp = () => {
 
         setIsVerifying(true);
         try {
-            const response = await axios.post(`${config.API_URL}/verify-otp`, { email: formData.email, otp: otpValue });
+            const response = await axios.post(`${config.API_URL}/verify-otp`, { 
+                email: formData.email, 
+                otp: otpValue,
+                type: 'registration'
+            });
             
             if (response.status === 200 && response.data.isValid) {
                 setIsOtpValid(true);
+                setIsEmailVerified(true);
                 setError('');
-                setSuccess('OTP verified successfully!');
-                // Focus the last OTP input to show the check mark
+                setSuccess('Email verified successfully!');
                 otpRefs[5].current.focus();
             } else {
                 setError(response.data.message || 'Invalid OTP.');
@@ -81,7 +118,6 @@ const SignUp = () => {
                 setIsOtpValid(false);
             }
         } catch (error) {
-            console.error('OTP Verification Error:', error);
             setError(error.response?.data?.message || 'Error verifying OTP.');
             setSuccess('');
             setIsOtpValid(false);
@@ -91,20 +127,17 @@ const SignUp = () => {
     };
 
     const handleOtpChange = (index, value) => {
-        // Only allow numbers
         const numValue = value.replace(/[^0-9]/g, '');
-        if (numValue.length > 1) return; // Prevent multiple digits
+        if (numValue.length > 1) return;
 
         const newOtpFields = [...otpFields];
         newOtpFields[index] = numValue;
         setOtpFields(newOtpFields);
 
-        // Auto-focus next input
         if (numValue && index < 5) {
             otpRefs[index + 1].current.focus();
         }
 
-        // Combine all fields for verification
         const combinedOtp = newOtpFields.join('');
         setOtp(combinedOtp);
 
@@ -118,7 +151,6 @@ const SignUp = () => {
     };
 
     const handleKeyDown = (index, e) => {
-        // Handle backspace
         if (e.key === 'Backspace' && !otpFields[index] && index > 0) {
             otpRefs[index - 1].current.focus();
         }
@@ -140,25 +172,27 @@ const SignUp = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         
-        // Validate password before proceeding
         if (!formData.password || !formData.confirmPassword || formData.password !== formData.confirmPassword) {
             setError('Passwords do not match.');
+            setIsLoading(false);
             return;
         }
 
         if (!isOtpValid) {
-            setError('Please enter a valid OTP.');
+            setError('Please verify your email first.');
+            setIsLoading(false);
             return;
         }
 
         try {
-            console.log('Attempting registration with:', { ...formData });
             const response = await axios.post(`${config.API_URL}/register`, {
                 firstName: formData.firstName,
                 lastName: formData.lastName,
                 email: formData.email,
                 password: formData.password,
+                otp: otp.join('')
             });
             
             if (response.status === 201) {
@@ -170,12 +204,12 @@ const SignUp = () => {
                 setError(response.data.message || 'Registration failed.');
             }
         } catch (error) {
-            console.error('Registration Error:', error);
             setError(error.response?.data?.message || 'An unexpected error occurred.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
-    // Add password validation function
     const validatePassword = (password) => {
         const hasMinLength = password.length >= 8;
         const hasUpperCase = /[A-Z]/.test(password);
@@ -189,80 +223,98 @@ const SignUp = () => {
         return isValid;
     };
 
-    // Update password handler
     const handlePasswordChange = (e) => {
         const value = e.target.value;
         setFormData({ ...formData, password: value });
         validatePassword(value);
+        setShowPasswordRules(true);
     };
 
-    // Handle password confirmation
     const handleConfirmPassword = (confirmPassword) => {
         setPasswordsMatch(confirmPassword === formData.password);
     };
 
-    // Handle OTP button state
-    const isOtpButtonDisabled = () => {
-        return !formData.email || otpSent || isEmailVerified;
+    const handleSocialSignup = async (provider) => {
+        try {
+            window.location.href = `${config.API_URL}/auth/${provider}/signup`;
+        } catch (error) {
+            setError(`Failed to connect with ${provider}`);
+        }
     };
 
-    // Check if form is valid
+    const isOtpButtonDisabled = () => {
+        return !formData.email || otpSent || isEmailVerified || isLoading;
+    };
+
     const isFormValid = () => {
         return formData.firstName.trim() !== '' &&
                formData.lastName.trim() !== '' &&
                formData.email.trim() !== '' &&
                isOtpValid &&
                isPasswordValid &&
-               passwordsMatch;
+               passwordsMatch &&
+               !isLoading;
     };
 
     return (
         <div className="signUp-container">
+ 
             <div className="signUp-form-container">
                 <div className="signUp-form-wrapper">
                     <div className="signUp-logo-container">
                         <div className="signUp-logo-text">FutureXFinance</div>
                     </div>
+                    <div className="signUp-security-banner">
+                        <ShieldCheckIcon size={20} />
+                        <span>Secure Registration Process</span>
+                    </div>
                     <form className="signUp-auth-form" onSubmit={handleSubmit}>
                         <div className="signUp-name-fields">
                             <div className="signUp-form-group">
                                 <label htmlFor="firstName">First Name</label>
-                                <input
-                                    type="text"
-                                    id="firstName"
-                                    name="firstName"
-                                    className="signUp-form-input"
-                                    value={formData.firstName}
-                                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                                    placeholder="John"
-                                    required
-                                />
+                                <div className="signUp-input-wrapper">
+                                    <UserIcon className="signUp-input-icon" />
+                                    <input
+                                        type="text"
+                                        id="firstName"
+                                        name="firstName"
+                                        className="signUp-form-input"
+                                        value={formData.firstName}
+                                        onChange={handleChange}
+                                        placeholder="First Name"
+                                        required
+                                    />
+                                </div>
                             </div>
                             <div className="signUp-form-group">
                                 <label htmlFor="lastName">Last Name</label>
-                                <input
-                                    type="text"
-                                    id="lastName"
-                                    name="lastName"
-                                    className="signUp-form-input"
-                                    value={formData.lastName}
-                                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                                    placeholder="Doe"
-                                    required
-                                />
+                                <div className="signUp-input-wrapper">
+                                    <UserIcon className="signUp-input-icon" />
+                                    <input
+                                        type="text"
+                                        id="lastName"
+                                        name="lastName"
+                                        className="signUp-form-input"
+                                        value={formData.lastName}
+                                        onChange={handleChange}
+                                        placeholder="Last Name"
+                                        required
+                                    />
+                                </div>
                             </div>
                         </div>
                         <div className="signUp-form-group">
                             <label htmlFor="email">Email</label>
-                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <div className="signUp-input-wrapper">
+                                <MailIcon className="signUp-input-icon" />
                                 <input
                                     type="email"
                                     id="email"
                                     name="email"
                                     className="signUp-form-input"
                                     value={formData.email}
-                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                    placeholder="me@example.com"
+                                    onChange={handleChange}
+                                    placeholder="Email"
                                     required
                                 />
                                 <button
@@ -271,7 +323,14 @@ const SignUp = () => {
                                     disabled={isOtpButtonDisabled()}
                                     onClick={handleSendOtp}
                                 >
-                                    {otpSent ? 'Resend' : 'OTP'}
+                                    {isLoading ? (
+                                        <>
+                                            <Loader2Icon className="loading-spinner" />
+                                            Sending OTP...
+                                        </>
+                                    ) : (
+                                        otpSent ? 'Resend' : 'Send OTP'
+                                    )}
                                 </button>
                             </div>
                         </div>
@@ -299,9 +358,9 @@ const SignUp = () => {
                                             {isVerifying ? (
                                                 <div className="loading-spinner"></div>
                                             ) : isOtpValid ? (
-                                                <Check className="check-icon" />
+                                                <CheckIcon className="check-icon" />
                                             ) : (
-                                                <X className="cross-icon" />
+                                                <XIcon className="cross-icon" />
                                             )}
                                         </div>
                                     )}
@@ -310,52 +369,43 @@ const SignUp = () => {
                         )}
                         <div className="signUp-form-group">
                             <label htmlFor="password">Password</label>
-                            <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                className="signUp-form-input"
-                                value={formData.password}
-                                onChange={handlePasswordChange}
-                                onFocus={() => setShowPasswordRules(true)}
-                                placeholder=""
-                                required
-                            />
+                            <div className="signUp-input-wrapper">
+                                <LockIcon className="signUp-input-icon" />
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    id="password"
+                                    name="password"
+                                    className="signUp-form-input"
+                                    value={formData.password}
+                                    onChange={handlePasswordChange}
+                                    onFocus={() => setShowPasswordRules(true)}
+                                    onBlur={() => setShowPasswordRules(false)}
+                                    placeholder="Password"
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    className="signUp-password-toggle"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                >
+                                    {showPassword ? <EyeOffIcon size={20} /> : <EyeIcon size={20} />}
+                                </button>
+                            </div>
                             {showPasswordRules && (
                                 <div className="password-rules">
-                                    <div className={`rule ${isPasswordValid ? 'valid' : ''}`}>
-                                        {isPasswordValid ? 
-                                            <Check size={12} className="check-icon" /> : 
-                                            <X size={12} className="cross-icon" />
-                                        }
+                                    <div className={`rule ${validatePassword(formData.password) ? 'valid' : ''}`}>
                                         <span>At least 8 characters</span>
                                     </div>
-                                    <div className={`rule ${isPasswordValid ? 'valid' : ''}`}>
-                                        {isPasswordValid ? 
-                                            <Check size={12} className="check-icon" /> : 
-                                            <X size={12} className="cross-icon" />
-                                        }
+                                    <div className={`rule ${/[A-Z]/.test(formData.password) ? 'valid' : ''}`}>
                                         <span>One uppercase letter</span>
                                     </div>
-                                    <div className={`rule ${isPasswordValid ? 'valid' : ''}`}>
-                                        {isPasswordValid ? 
-                                            <Check size={12} className="check-icon" /> : 
-                                            <X size={12} className="cross-icon" />
-                                        }
+                                    <div className={`rule ${/[a-z]/.test(formData.password) ? 'valid' : ''}`}>
                                         <span>One lowercase letter</span>
                                     </div>
-                                    <div className={`rule ${isPasswordValid ? 'valid' : ''}`}>
-                                        {isPasswordValid ? 
-                                            <Check size={12} className="check-icon" /> : 
-                                            <X size={12} className="cross-icon" />
-                                        }
+                                    <div className={`rule ${/\d/.test(formData.password) ? 'valid' : ''}`}>
                                         <span>One number</span>
                                     </div>
-                                    <div className={`rule ${isPasswordValid ? 'valid' : ''}`}>
-                                        {isPasswordValid ? 
-                                            <Check size={12} className="check-icon" /> : 
-                                            <X size={12} className="cross-icon" />
-                                        }
+                                    <div className={`rule ${/[!@#$%^&*(),.?":{}|<>]/.test(formData.password) ? 'valid' : ''}`}>
                                         <span>One special character</span>
                                     </div>
                                 </div>
@@ -363,39 +413,124 @@ const SignUp = () => {
                         </div>
                         <div className="signUp-form-group">
                             <label htmlFor="confirmPassword">Confirm Password</label>
-                            <input
-                                type="password"
-                                id="confirmPassword"
-                                name="confirmPassword"
-                                className="signUp-form-input"
-                                value={formData.confirmPassword}
-                                onChange={(e) => {
-                                    setFormData({ ...formData, confirmPassword: e.target.value });
-                                    handleConfirmPassword(e.target.value);
-                                }}
-                                placeholder=""
-                                required
-                            />
+                            <div className="signUp-input-wrapper">
+                                <LockIcon className="signUp-input-icon" />
+                                <input
+                                    type={showConfirmPassword ? "text" : "password"}
+                                    id="confirmPassword"
+                                    name="confirmPassword"
+                                    className="signUp-form-input"
+                                    value={formData.confirmPassword}
+                                    onChange={(e) => {
+                                        setFormData({ ...formData, confirmPassword: e.target.value });
+                                        handleConfirmPassword(e.target.value);
+                                    }}
+                                    placeholder="Confirm Password"
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    className="signUp-password-toggle"
+                                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                >
+                                    {showConfirmPassword ? <EyeOffIcon size={20} /> : <EyeIcon size={20} />}
+                                </button>
+                            </div>
                         </div>
-                        {error && <div className="signUp-error-message">{error}</div>}
-                        {success && <div className="signUp-success-message">{success}</div>}
+                        <div className="signUp-terms-section">
+                            <label className="signUp-terms-checkbox">
+                                <input
+                                    type="checkbox"
+                                    checked={acceptedTerms}
+                                    onChange={(e) => setAcceptedTerms(e.target.checked)}
+                                    required
+                                />
+                                <span>I agree to the <button type="button" onClick={() => setShowTerms(true)}>Terms of Service</button> and <button type="button" onClick={() => setShowTerms(true)}>Privacy Policy</button></span>
+                            </label>
+                        </div>
+                        {error && (
+                            <div className="signUp-error-message">
+                                <AlertCircleIcon size={16} />
+                                {error}
+                            </div>
+                        )}
+                        {success && (
+                            <div className="signUp-success-message">
+                                <CheckIcon size={16} />
+                                {success}
+                            </div>
+                        )}
                         <button
                             type="submit"
                             className="signUp-submit-button"
-                            disabled={!isFormValid()}
+                            disabled={!isFormValid() || !acceptedTerms}
                         >
-                            Sign Up
+                            {isLoading ? (
+                                <>
+                                    <Loader2Icon className="loading-spinner" />
+                                    Creating Account...
+                                </>
+                            ) : (
+                                <>
+                                    <UserPlusIcon />
+                                    Create Account
+                                </>
+                            )}
                         </button>
                     </form>
                     <div className="signUp-additional-options">
+                        <div className="signUp-divider">
+                            <span>or</span>
+                        </div>
+                        <div className="signUp-social-buttons">
+                            <button
+                                type="button"
+                                className="signUp-social-button google"
+                                onClick={() => handleSocialSignup('google')}
+                                disabled={isLoading}
+                            >
+                                <Chrome size={20} />
+                                Continue with Google
+                            </button>
+                            <button
+                                type="button"
+                                className="signUp-social-button apple"
+                                onClick={() => handleSocialSignup('apple')}
+                                disabled={isLoading}
+                            >
+                                <Apple size={20} />
+                                Continue with Apple
+                            </button>
+                            <button
+                                type="button"
+                                className="signUp-social-button facebook"
+                                onClick={() => handleSocialSignup('facebook')}
+                                disabled={isLoading}
+                            >
+                                <Facebook size={20} />
+                                Continue with Facebook
+                            </button>
+                        </div>
                         <Link to="/signin" className="signUp-secondary-button">
-                            <span><LockKeyhole size={13} /></span>
+                            <span><LockKeyholeIcon size={16} /></span>
                             <span>Already have an account?</span>
-                            <span>Login</span>
+                            <span>Sign In</span>
                         </Link>
                     </div>
                 </div>
             </div>
+            {showTerms && (
+                <div className="signUp-terms-modal">
+                    <div className="signUp-terms-content">
+                        <h2>Terms of Service</h2>
+                        <div className="signUp-terms-text">
+                            {/* Add your terms of service text here */}
+                            <p>By using FutureXFinance, you agree to these terms...</p>
+                        </div>
+                        <button onClick={() => setShowTerms(false)}>Close</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
