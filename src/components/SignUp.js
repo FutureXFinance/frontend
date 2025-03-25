@@ -12,8 +12,7 @@ import {
     UserPlusIcon, 
     CheckIcon, 
     XIcon, 
-    Chrome, 
-    Apple,
+    Chrome,
     LockKeyholeIcon,
     Loader2Icon,
     GlobeIcon,
@@ -238,14 +237,6 @@ const SignUp = () => {
             window.location.href = `${config.API_URL}/auth/google/signup`;
         } catch (error) {
             setError('Failed to connect with Google');
-        }
-    };
-
-    const handleAppleSignUp = async () => {
-        try {
-            window.location.href = `${config.API_URL}/auth/apple/signup`;
-        } catch (error) {
-            setError('Failed to connect with Apple');
         }
     };
 
@@ -498,15 +489,6 @@ const SignUp = () => {
                             >
                                 <Chrome size={20} />
                                 Continue with Google
-                            </button>
-                            <button
-                                type="button"
-                                className="signUp-social-button apple"
-                                onClick={handleAppleSignUp}
-                                disabled={isLoading}
-                            >
-                                <Apple size={20} />
-                                Continue with Apple
                             </button>
                         </div>
                         <Link to="/signin" className="signUp-secondary-button">

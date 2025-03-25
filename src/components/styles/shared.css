@@ -235,20 +235,6 @@ body {
     transform: translateY(-1px);
 }
 
-.signIn-social-button.apple,
-.signUp-social-button.apple {
-    background: #000000;
-    color: #ffffff;
-    border: 1px solid #333333;
-}
-
-.signIn-social-button.apple:hover,
-.signUp-social-button.apple:hover {
-    background: #1a1a1a;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-    transform: translateY(-1px);
-}
-
 .signIn-social-button:disabled,
 .signUp-social-button:disabled {
     opacity: 0.7;

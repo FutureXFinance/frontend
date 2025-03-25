@@ -8,7 +8,6 @@ import {
     UserIcon, 
     ShieldIcon, 
     Chrome, 
-    Apple, 
     FacebookIcon,
     Loader2Icon,
     GlobeIcon,
@@ -97,14 +96,6 @@ const SignIn = () => {
             window.location.href = `${config.API_URL}/auth/google/signin`;
         } catch (error) {
             setError('Failed to connect with Google');
-        }
-    };
-
-    const handleAppleSignIn = async () => {
-        try {
-            window.location.href = `${config.API_URL}/auth/apple/signin`;
-        } catch (error) {
-            setError('Failed to connect with Apple');
         }
     };
 
@@ -254,15 +245,6 @@ const SignIn = () => {
                                     >
                                         <Chrome size={20} />
                                         Continue with Google
-                                    </button>
-                                    <button
-                                        type="button"
-                                        className="signIn-social-button apple"
-                                        onClick={handleAppleSignIn}
-                                        disabled={isLoading}
-                                    >
-                                        <Apple size={20} />
-                                        Continue with Apple
                                     </button>
                                 </div>
                             </div>
