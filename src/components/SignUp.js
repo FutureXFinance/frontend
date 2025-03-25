@@ -66,7 +66,7 @@ const SignUp = () => {
         setIsLoading(true);
         
         try {
-            const response = await axios.post(`${config.API_URL}/send-otp`, { 
+            const response = await axios.post(`${config.API_URL}/api/send-otp`, { 
                 email: formData.email,
                 type: 'registration'
             });
@@ -98,27 +98,21 @@ const SignUp = () => {
 
         setIsVerifying(true);
         try {
-            const response = await axios.post(`${config.API_URL}/verify-otp`, { 
-                email: formData.email, 
-                otp: otpValue,
-                type: 'registration'
+            const response = await axios.post(`${config.API_URL}/api/verify-otp`, {
+                email: formData.email,
+                otp: otpValue
             });
-            
-            if (response.status === 200 && response.data.isValid) {
+
+            if (response.status === 200) {
                 setIsOtpValid(true);
                 setIsEmailVerified(true);
-                setError('');
                 setSuccess('Email verified successfully!');
-                otpRefs[5].current.focus();
-            } else {
-                setError(response.data.message || 'Invalid OTP.');
-                setSuccess('');
-                setIsOtpValid(false);
+                setError('');
             }
         } catch (error) {
-            setError(error.response?.data?.message || 'Error verifying OTP.');
-            setSuccess('');
             setIsOtpValid(false);
+            setError(error.response?.data?.message || 'Error verifying OTP. Please try again.');
+            setSuccess('');
         } finally {
             setIsVerifying(false);
         }
@@ -185,12 +179,11 @@ const SignUp = () => {
         }
 
         try {
-            const response = await axios.post(`${config.API_URL}/register`, {
+            const response = await axios.post(`${config.API_URL}/api/register`, {
                 firstName: formData.firstName,
                 lastName: formData.lastName,
                 email: formData.email,
-                password: formData.password,
-                otp: otp.join('')
+                password: formData.password
             });
             
             if (response.status === 201) {
@@ -202,7 +195,14 @@ const SignUp = () => {
                 setError(response.data.message || 'Registration failed.');
             }
         } catch (error) {
-            setError(error.response?.data?.message || 'An unexpected error occurred.');
+            console.error('Registration error:', error.response?.data || error.message);
+            if (error.response?.status === 400) {
+                setError(error.response.data.message || 'Please verify your email first.');
+            } else if (error.response?.status === 409) {
+                setError('This email is already registered. Please sign in instead.');
+            } else {
+                setError('An unexpected error occurred. Please try again.');
+            }
         } finally {
             setIsLoading(false);
         }
@@ -215,21 +215,22 @@ const SignUp = () => {
         const hasNumber = /\d/.test(password);
         const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
         
-        const isValid = hasMinLength && hasUpperCase && hasLowerCase && 
-                       hasNumber && hasSpecialChar;
-        setIsPasswordValid(isValid);
-        return isValid;
+        return hasMinLength && hasUpperCase && hasLowerCase && 
+               hasNumber && hasSpecialChar;
     };
 
     const handlePasswordChange = (e) => {
         const value = e.target.value;
+        const isValid = validatePassword(value);
         setFormData({ ...formData, password: value });
-        validatePassword(value);
+        setIsPasswordValid(isValid);
         setShowPasswordRules(true);
     };
 
-    const handleConfirmPassword = (confirmPassword) => {
-        setPasswordsMatch(confirmPassword === formData.password);
+    const handleConfirmPassword = (e) => {
+        const value = e.target.value;
+        setFormData({ ...formData, confirmPassword: value });
+        setPasswordsMatch(value === formData.password);
     };
 
     const handleGoogleSignUp = async () => {
@@ -419,10 +420,7 @@ const SignUp = () => {
                                     name="confirmPassword"
                                     className="signUp-form-input"
                                     value={formData.confirmPassword}
-                                    onChange={(e) => {
-                                        setFormData({ ...formData, confirmPassword: e.target.value });
-                                        handleConfirmPassword(e.target.value);
-                                    }}
+                                    onChange={handleConfirmPassword}
                                     placeholder="Confirm Password"
                                     required
                                 />

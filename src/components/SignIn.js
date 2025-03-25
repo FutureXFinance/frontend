@@ -19,6 +19,10 @@ import './styles/SignIn.css';
 import './styles/shared.css';
 import config from '../config';
 
+// Configure axios defaults
+axios.defaults.baseURL = config.API_URL;
+axios.defaults.headers.common['Content-Type'] = 'application/json';
+
 const SignIn = () => {
     const navigate = useNavigate();
     const [loginMethod, setLoginMethod] = useState('email'); // 'email' or 'qr'
@@ -53,17 +57,18 @@ const SignIn = () => {
         try {
             const response = await axios.post('/api/auth/login', formData);
             
-            if (response.data.requires2FA) {
-                setIs2FAEnabled(true);
-                setSuccess('Please enter your 2FA code');
-                setIsLoading(false);
-                return;
+            if (response.data.success) {
+                setSuccess('Login successful!');
+                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('user', JSON.stringify(response.data.user));
+                setTimeout(() => {
+                    navigate('/dashboard');
+                }, 1000);
+            } else {
+                setError(response.data.message || 'Login failed. Please try again.');
             }
-
-            setSuccess('Login successful!');
-            localStorage.setItem('token', response.data.token);
-            navigate('/dashboard');
         } catch (err) {
+            console.error('Login error:', err);
             setError(err.response?.data?.message || 'Login failed. Please try again.');
         } finally {
             setIsLoading(false);
