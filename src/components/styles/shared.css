@@ -103,7 +103,8 @@ body {
 /* Form group styles */
 .signIn-form-group,
 .signUp-form-group {
-    margin-bottom: var(--space-lg);
+    position: relative;
+    margin-bottom: var(--space-md); /* Reduced from var(--space-lg) */
 }
 
 .signIn-form-group label,
@@ -174,6 +175,7 @@ body {
     transition: all var(--transition-normal);
     position: relative;
     overflow: hidden;
+    margin: var(--space-md) 0; /* Reduced from var(--space-lg) */
 }
 
 .signIn-submit-button:hover:not(:disabled),
@@ -336,4 +338,11 @@ body {
     .signUp-form-input {
         font-size: 0.875rem;
     }
-} 
+}
+
+.signIn-auth-form,
+.signUp-auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md); /* Reduced from var(--space-lg) */
+}
