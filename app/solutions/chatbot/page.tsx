@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Navbar from "../../../components/shared/Navbar";
 import Footer from "../../../components/shared/Footer";
-import { chatWithBot } from "../../../utils/api";
+import { sendChatMessage } from "../../../utils/api";
 
 export default function ChatbotPage() {
     const [messages, setMessages] = useState<any[]>([]);
@@ -20,7 +20,7 @@ export default function ChatbotPage() {
         setIsLoading(true);
 
         try {
-            const botResponse = await chatWithBot(input);
+            const botResponse = await sendChatMessage(input);
             setMessages(prev => [...prev, { role: "bot", text: botResponse }]);
         } catch (err) {
             console.error(err);
@@ -68,8 +68,8 @@ export default function ChatbotPage() {
                         {messages.map((msg, i) => (
                             <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"} animate-in`}>
                                 <div className={`max-w-[80%] p-6 rounded-3xl text-sm font-medium leading-relaxed ${msg.role === "user"
-                                        ? "bg-emerald-500 text-slate-950 rounded-tr-none font-bold shadow-lg shadow-emerald-500/10"
-                                        : "bg-white/[0.02] border border-white/5 text-slate-200 rounded-tl-none backdrop-blur-md"
+                                    ? "bg-emerald-500 text-slate-950 rounded-tr-none font-bold shadow-lg shadow-emerald-500/10"
+                                    : "bg-white/[0.02] border border-white/5 text-slate-200 rounded-tl-none backdrop-blur-md"
                                     }`}>
                                     {msg.text}
                                 </div>
