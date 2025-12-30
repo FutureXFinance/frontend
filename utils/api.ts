@@ -88,9 +88,16 @@ export interface KYCVerificationResult {
 export interface FraudAnalysisResult {
     transaction_id: string;
     risk_score: number;
+    risk_level: string;
     is_fraudulent: boolean;
+    ml_score: number | null;
+    rule_score: number;
     anomalies: string[];
     recommendation: string;
+    details: {
+        model_used: string;
+        [key: string]: any;
+    };
 }
 
 export interface DocumentParseResult {
