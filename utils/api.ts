@@ -1,5 +1,5 @@
 /**
- * API Client Utility for FutureX Finance Frontend
+ * API Client Utility for FutureXFinance Frontend
  * Handles all API communication with backend services
  */
 

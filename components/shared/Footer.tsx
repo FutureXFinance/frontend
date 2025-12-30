@@ -48,12 +48,14 @@ export default function Footer() {
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-12 mb-24">
                     <div className="col-span-2 space-y-10">
                         <Link href="/" className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-slate-950">
-                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                                </svg>
+                            <div className="w-10 h-10">
+                                <img
+                                    src="/logo.png"
+                                    alt="FutureXFinance Logo"
+                                    className="w-full h-full object-contain"
+                                />
                             </div>
-                            <span className="text-xl font-bold text-white tracking-tight">FutureX<span className="text-emerald-500">.</span></span>
+                            <span className="text-xl font-bold text-white tracking-tight">FutureX<span className="text-emerald-500">Finance</span></span>
                         </Link>
                         <p className="text-slate-500 text-sm max-w-sm leading-relaxed font-medium">
                             Sovereign AI infrastructure engineered for high-throughput institutional banking and global regulatory compliance. Built on trust and neural operational excellence.
@@ -85,7 +87,7 @@ export default function Footer() {
 
                 <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8">
                     <p className="text-[10px] font-bold text-slate-800 uppercase tracking-widest leading-none">
-                        &copy; 2025 FutureX Finance Institutional Group. All operational protocols active.
+                        &copy; 2025 FutureXFinance. All rights reserved.
                     </p>
                     <div className="flex gap-10 text-[10px] font-bold text-slate-800 uppercase tracking-widest">
                         <Link href="#" className="hover:text-emerald-500 transition-colors">Privacy Protocol</Link>

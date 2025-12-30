@@ -27,13 +27,15 @@ export default function Navbar() {
             <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-3 group">
-                    <div className="relative w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center transition-all duration-500 group-hover:rotate-6 group-hover:scale-110">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-slate-950">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                        </svg>
+                    <div className="relative w-10 h-10 transition-all duration-500 group-hover:scale-110">
+                        <img
+                            src="/logo.png"
+                            alt="FutureXFinance Logo"
+                            className="w-full h-full object-contain"
+                        />
                     </div>
                     <span className="text-xl font-bold text-white tracking-tight">
-                        FutureX<span className="text-emerald-500">.</span>
+                        FutureX<span className="text-emerald-500">Finance</span>
                     </span>
                 </Link>
 
