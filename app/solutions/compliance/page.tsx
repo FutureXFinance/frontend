@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Navbar from "../../../components/shared/Navbar";
 import Footer from "../../../components/shared/Footer";
-import { checkCompliance } from "../../../utils/api";
+import { getComplianceUpdates } from "../../../utils/api";
 
 export default function CompliancePage() {
     const [status, setStatus] = useState<any>(null);
@@ -12,7 +12,7 @@ export default function CompliancePage() {
     const handleCheck = async () => {
         setIsLoading(true);
         try {
-            const result = await checkCompliance();
+            const result = await getComplianceUpdates();
             setStatus(result);
         } catch (err) {
             console.error(err);
