@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Navbar from "../../../components/shared/Navbar";
-import Footer from "../../../components/shared/Footer";
 import { getCustomerInsights } from "../../../utils/api";
 
 export default function InsightsPage() {
@@ -25,8 +23,6 @@ export default function InsightsPage() {
 
     return (
         <div className="flex flex-col min-h-screen bg-[#020617] text-white selection:bg-emerald-500/30">
-            <Navbar />
-
             <main className="flex-grow pt-40 pb-24 px-6 md:px-12">
                 <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
                     {/* Left: Content */}
@@ -121,9 +117,6 @@ export default function InsightsPage() {
                         )}
                     </div>
                 </div>
-            </main>
-
-            <Footer />
-        </div>
+            </main>        </div>
     );
 }

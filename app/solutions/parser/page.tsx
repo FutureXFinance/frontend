@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Navbar from "../../../components/shared/Navbar";
-import Footer from "../../../components/shared/Footer";
 import { parseDocument } from "../../../utils/api";
 
 export default function ParserPage() {
@@ -26,8 +24,6 @@ export default function ParserPage() {
 
     return (
         <div className="flex flex-col min-h-screen bg-[#020617] text-white selection:bg-emerald-500/30">
-            <Navbar />
-
             <main className="flex-grow pt-40 pb-24 px-6 md:px-12">
                 <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-20 items-start">
                     {/* Left Side: Content */}
@@ -110,9 +106,6 @@ export default function ParserPage() {
                         </div>
                     </div>
                 </div>
-            </main>
-
-            <Footer />
-        </div>
+            </main>        </div>
     );
 }

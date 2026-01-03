@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Navbar from "../../../components/shared/Navbar";
-import Footer from "../../../components/shared/Footer";
 import AnalyticsDashboard from "../../../components/solutions/fraud/AnalyticsDashboard";
 import TransactionHistory from "../../../components/solutions/fraud/TransactionHistory";
 import AlertsPanel from "../../../components/solutions/fraud/AlertsPanel";
@@ -60,8 +58,6 @@ export default function FraudDashboardPage() {
 
     return (
         <div className="flex flex-col min-h-screen bg-[#020617] text-white selection:bg-emerald-500/30">
-            <Navbar />
-
             <main className="flex-grow pt-40 pb-24 px-6">
                 <div className="max-w-7xl mx-auto">
                     {/* Header */}
@@ -308,9 +304,6 @@ export default function FraudDashboardPage() {
                     {activeTab === "history" && <TransactionHistory />}
                     {activeTab === "alerts" && <AlertsPanel />}
                 </div>
-            </main>
-
-            <Footer />
-        </div>
+            </main>        </div>
     );
 }

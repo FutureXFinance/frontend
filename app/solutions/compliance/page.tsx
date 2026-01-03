@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Navbar from "../../../components/shared/Navbar";
-import Footer from "../../../components/shared/Footer";
 import { getComplianceUpdates } from "../../../utils/api";
 
 export default function CompliancePage() {
@@ -23,8 +21,6 @@ export default function CompliancePage() {
 
     return (
         <div className="flex flex-col min-h-screen bg-[#020617] text-white selection:bg-emerald-500/30">
-            <Navbar />
-
             <main className="flex-grow pt-40 pb-24 px-6 md:px-12">
                 <div className="max-w-7xl mx-auto">
                     <div className="flex flex-col lg:flex-row justify-between items-start gap-20 mb-24">
@@ -104,9 +100,6 @@ export default function CompliancePage() {
                         </div>
                     </div>
                 </div>
-            </main>
-
-            <Footer />
-        </div>
+            </main>        </div>
     );
 }

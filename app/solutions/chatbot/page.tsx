@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Navbar from "../../../components/shared/Navbar";
-import Footer from "../../../components/shared/Footer";
 import { sendChatMessage } from "../../../utils/api";
 
 export default function ChatbotPage() {
@@ -31,8 +29,6 @@ export default function ChatbotPage() {
 
     return (
         <div className="flex flex-col min-h-screen bg-[#020617] text-white selection:bg-emerald-500/30">
-            <Navbar />
-
             <main className="flex-grow pt-40 pb-24 px-6 md:px-12">
                 <div className="max-w-5xl mx-auto flex flex-col h-[700px] card-premium overflow-hidden border-white/5 bg-slate-900/40">
                     {/* Top Panel */}
@@ -108,9 +104,6 @@ export default function ChatbotPage() {
                         <p className="mt-4 text-[9px] font-black text-slate-800 uppercase tracking-widest text-center">Protocol V11 Secured Session • Neural Consensus Enabled</p>
                     </div>
                 </div>
-            </main>
-
-            <Footer />
-        </div>
+            </main>        </div>
     );
 }

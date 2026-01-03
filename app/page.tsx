@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Navbar from "../components/shared/Navbar";
-import Footer from "../components/shared/Footer";
 
 export default function Home() {
     const solutions = [
@@ -52,8 +50,6 @@ export default function Home() {
 
     return (
         <div className="flex flex-col min-h-screen bg-[#020617] selection:bg-emerald-500/30">
-            <Navbar />
-
             <main className="flex-grow">
                 {/* Hero Section - The "Stripes" Minimalist Look */}
                 <section className="relative pt-44 pb-32 px-6 overflow-hidden">
@@ -184,8 +180,6 @@ export default function Home() {
                     </div>
                 </section>
             </main>
-
-            <Footer />
         </div>
     );
 }
