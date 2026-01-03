@@ -171,7 +171,7 @@ export default function Navbar() {
                     >
                         Sign In
                     </Link>
-                    <Link href="/dashboard">
+                    <Link href="/signup">
                         <button className="bg-emerald-500 text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-emerald-400 transition-all active:scale-95 shadow-lg shadow-emerald-500/20">
                             Get Started
                         </button>

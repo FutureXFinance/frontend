@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Linkedin, Twitter, Github } from "lucide-react";
+import { Github } from "lucide-react";
 
 export default function Footer() {
     const sections = [
@@ -66,22 +66,9 @@ export default function Footer() {
                         </p>
                         <div className="flex gap-4">
                             <Link
-                                href="https://linkedin.com"
+                                href="https://github.com/FutureXFinance"
                                 target="_blank"
-                                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-emerald-500 hover:border-emerald-500/30 hover:bg-emerald-500/10 transition-all"
-                            >
-                                <Linkedin className="w-4 h-4" />
-                            </Link>
-                            <Link
-                                href="https://twitter.com"
-                                target="_blank"
-                                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-emerald-500 hover:border-emerald-500/30 hover:bg-emerald-500/10 transition-all"
-                            >
-                                <Twitter className="w-4 h-4" />
-                            </Link>
-                            <Link
-                                href="https://github.com"
-                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-emerald-500 hover:border-emerald-500/30 hover:bg-emerald-500/10 transition-all"
                             >
                                 <Github className="w-4 h-4" />
